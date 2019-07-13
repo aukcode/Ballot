@@ -1,0 +1,19 @@
+{
+  "name": "pole",
+  "version": "0.0.0",
+  "description": "e-voting system for organizations",
+  "author": "Øyvind Aukner <oyvind.auk@gmail.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/pole.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}
