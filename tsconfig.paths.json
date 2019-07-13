@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      // "auk/core": ["packages/core/*"],
+      // Points at name in package.json for packages
+      "auk/pole": ["packages/pole/*"]
+    }
+  }
+}
