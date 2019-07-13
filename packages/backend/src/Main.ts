@@ -1,8 +1,22 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response, NextFunction } from "express";
 const app = express();
-const port = 3000;
+const port = 8080;
 
-app.get("/", (req: Request, res: Response) => res.send("start page!"));
-app.get("/hw", (req: Request, res: Response) => res.send("Hello World!"));
+const hey = "Hello from backend";
+
+/* 
+    1. Implement POST endpoint (think Collections)
+    2. Setup MongoDB
+    3. Setup Mongoose
+*/
+
+const whiteListDomains = (req: Request, res: Response, next: NextFunction) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  next();
+};
+
+app.use(whiteListDomains);
+
+app.get("/hey", (req: Request, res: Response) => res.json({ hey }).send());
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
