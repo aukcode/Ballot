@@ -8,7 +8,7 @@ const app = express_1.default();
 const port = 8080;
 const hey = "Hello from backend";
 const whiteListDomains = (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     next();
 };
 app.use(whiteListDomains);
