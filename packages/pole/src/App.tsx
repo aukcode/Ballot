@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
+import React, { useEffect, useState } from 'react';
+import './App.css';
 
 const fetchHey = async (setState: (state: string) => void) => {
-  const result = await fetch("http://localhost:8080/hey").then(res =>
+  const result = await fetch('http://localhost:8080/hey').then(res =>
     res.json()
   );
   console.log(result);
@@ -10,7 +10,7 @@ const fetchHey = async (setState: (state: string) => void) => {
 };
 
 const App: React.FC = () => {
-  const [state, setstate] = useState<string>("Loading...");
+  const [state, setstate] = useState<string>('Loading...');
 
   useEffect(() => {
     fetchHey(setstate);
@@ -18,7 +18,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-        <h1>{state}</h1>
+      <h1>{state}</h1>
     </div>
   );
 };
