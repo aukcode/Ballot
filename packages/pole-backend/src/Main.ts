@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 const app = express();
 const port = 8080;
 
-const hey = 'Hello from backend';
+const hey = 'Hello from pole-backend';
 
 /* 
     1. Implement POST endpoint (think Collections)
