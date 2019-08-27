@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { RouteMap } from './RouteMap';
-import { HomeCompnent } from './home/Home';
+import { HomeComponent } from './home/Home';
 
 export const Routes = () => {
   return (
@@ -9,7 +9,7 @@ export const Routes = () => {
       <Switch>
         <Route
           path={RouteMap.home.path}
-          component={HomeCompnent}
+          component={HomeComponent}
           exact={true}
         />
 
