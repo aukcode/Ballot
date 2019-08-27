@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import { Routes } from './routes/Routes';
 
 const fetchHey = async (setState: (state: string) => void) => {
   const result = await fetch('http://localhost:8080/hey').then(res =>
@@ -18,7 +19,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <h1>{state}</h1>
+      <Routes />
     </div>
   );
 };
