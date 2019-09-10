@@ -1,17 +1,14 @@
 import express, { Request, Response, NextFunction } from 'express';
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const port = 8080;
 
 const hey = 'Hello from pole-backend';
-
-/* 
-    1. Implement POST endpoint (think Collections)
-    2. Setup MongoDB
-    3. Setup Mongoose
-*/
 
 const whiteListDomains = (req: Request, res: Response, next: NextFunction) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -21,19 +18,20 @@ const whiteListDomains = (req: Request, res: Response, next: NextFunction) => {
 app.use(whiteListDomains);
 
 // IMPORT ROUTES
-const authRoute = require('auth/authenticate');
-const poleRoute = require('routes/poles');
+const authRoute = require('./auth/authenticate');
+const poleRoute = require('./routes/poles');
 
 //  CONNECT DB
-mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () =>
-  console.log('connected to db!')
-);
+// mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () =>
+//   console.log('connected to db!')
+// );
 
 // MIDDLEWARE
+app.use(express.json());
 
 // ROUTES
-app.use('api/user', authRoute);
-app.use('api/poles', poleRoute);
+app.use('/api/user', authRoute);
+app.use('/api/poles', poleRoute);
 
 app.get('/hey', (req: Request, res: Response) => res.json({ hey }).send());
 
@@ -59,7 +57,7 @@ app.post('/api/login', (req: Request, res: Response) => {
     username: 'auk',
     email: 'auk@gmail.com',
   };
-  jwt.sign({ user }, 'secretkey', (err, token) => {
+  jwt.sign({ user }, ' ', (err, token) => {
     res.json({
       token,
     });

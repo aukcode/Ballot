@@ -1,3 +1,4 @@
+'use strict';
 var __awaiter =
   (this && this.__awaiter) ||
   function(thisArg, _arguments, P, generator) {
@@ -26,19 +27,28 @@ var __awaiter =
       step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
   };
+var __importDefault =
+  (this && this.__importDefault) ||
+  function(mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
 const router = require('express').Router();
-const User = require('../model/User');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const { registerValidation, loginValidation } = require('../validation');
+const User = require('../models/User');
+const jsonwebtoken_1 = __importDefault(require('jsonwebtoken'));
+const bcryptjs_1 = __importDefault(require('bcryptjs'));
+const Validation_1 = require('../Validation');
 router.post('/register', (req, res) =>
   __awaiter(this, void 0, void 0, function*() {
-    const { error } = registerValidation(req.body);
+    const { error } = Validation_1.registerValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     const emailExists = yield User.findOne({ email: req.body.email });
     if (emailExists) return res.status(400).send('Email already exists');
-    const salt = yield bcrypt.genSalt(10);
-    const hashedPassword = yield bcrypt.hash(req.body.password, salt);
+    const salt = yield bcryptjs_1.default.genSalt(10);
+    const hashedPassword = yield bcryptjs_1.default.hash(
+      req.body.password,
+      salt
+    );
     const user = new User({
       name: req.body.name,
       email: req.body.email,
@@ -54,13 +64,19 @@ router.post('/register', (req, res) =>
 );
 router.post('/login', (req, res) =>
   __awaiter(this, void 0, void 0, function*() {
-    const { error } = loginValidation(req.body);
+    const { error } = Validation_1.loginValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     const user = yield User.findOne({ email: req.body.email });
     if (!user) return res.status(400).send('Email is not found');
-    const validPass = yield bcrypt.compare(req.body.password, user.password);
+    const validPass = yield bcryptjs_1.default.compare(
+      req.body.password,
+      user.password
+    );
     if (!validPass) return res.status(400).send('Invalid password');
-    const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+    const token = jsonwebtoken_1.default.sign(
+      { _id: user._id },
+      process.env.TOKEN_SECRET
+    );
     res.header('auth-token', token).send(token);
   })
 );

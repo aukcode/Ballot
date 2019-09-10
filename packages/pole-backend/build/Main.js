@@ -6,8 +6,9 @@ var __importDefault =
   };
 Object.defineProperty(exports, '__esModule', { value: true });
 const express_1 = __importDefault(require('express'));
-const jwt = require('jsonwebtoken');
-const mongoose_1 = __importDefault(require('mongoose'));
+const jsonwebtoken_1 = __importDefault(require('jsonwebtoken'));
+const dotenv_1 = __importDefault(require('dotenv'));
+dotenv_1.default.config();
 const app = express_1.default();
 const port = 8080;
 const hey = 'Hello from pole-backend';
@@ -16,15 +17,11 @@ const whiteListDomains = (req, res, next) => {
   next();
 };
 app.use(whiteListDomains);
-const authRoute = require('auth/authenticate');
-const poleRoute = require('routes/poles');
-mongoose_1.default.connect(
-  process.env.DB_CONNECT,
-  { useNewUrlParser: true },
-  () => console.log('connected to db!')
-);
-app.use('api/user', authRoute);
-app.use('api/poles', poleRoute);
+const authRoute = require('./auth/authenticate');
+const poleRoute = require('./routes/poles');
+app.use(express_1.default.json());
+app.use('/api/user', authRoute);
+app.use('/api/poles', poleRoute);
 app.get('/hey', (req, res) => res.json({ hey }).send());
 app.post('/api/login', (req, res) => {
   const user = {
@@ -32,7 +29,7 @@ app.post('/api/login', (req, res) => {
     username: 'auk',
     email: 'auk@gmail.com',
   };
-  jwt.sign({ user }, 'secretkey', (err, token) => {
+  jsonwebtoken_1.default.sign({ user }, ' ', (err, token) => {
     res.json({
       token,
     });
