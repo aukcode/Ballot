@@ -5,11 +5,11 @@ export interface IGetUserAuthInfoRequest extends Request {
   user: string | object;
 }
 
-module.exports = function(
+export const verify = (
   req: IGetUserAuthInfoRequest,
   res: Response,
   next: NextFunction
-) {
+) => {
   const token = req.header('auth-token');
   if (!token) return res.status(401).send('Access Denied');
 
