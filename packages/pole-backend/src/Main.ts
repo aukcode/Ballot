@@ -35,20 +35,8 @@ app.use('/api/poles', poleRoute);
 
 app.get('/hey', (req: Request, res: Response) => res.json({ hey }).send());
 
-// app.get('/api', verifyToken, (req: Request, res: Response) => {
-//   jwt.verify(req.token, 'secretkey', (err, authData) => {
-//     if (err) {
-//       res.sendStatus(403);
-//     } else {
-//       res
-//         .json({
-//           message: 'Welcome to the API now',
-//           authData,
-//         })
-//         .send();
-//     }
-//   });
-// });
+// Traversy Media:
+/*
 
 app.post('/api/login', (req: Request, res: Response) => {
   // Mock user
@@ -64,15 +52,32 @@ app.post('/api/login', (req: Request, res: Response) => {
   });
 });
 
-// function verifyToken(req: Request, res: Response, next) {
-//   const bearerHeader = req.headers['authorization'];
-//   if (!bearerHeader) {
-//     res.sendStatus(403);
-//   }
-//   const bearer = bearerHeader.split(' ');
-//   const bearerToken = bearer[1];
-//   req.token = bearerToken;
-//   next();
-// }
+app.get('/api', verifyToken, (req: Request, res: Response) => {
+  jwt.verify(req.token, 'secretkey', (err, authData) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      res
+          .json({
+            message: 'Welcome to the API now',
+            authData,
+          })
+          .send();
+    }
+  });
+});
+
+
+function verifyToken(req: Request, res: Response, next) {
+  const bearerHeader = req.headers['authorization'];
+  if (!bearerHeader) {
+    res.sendStatus(403);
+  }
+  const bearer = bearerHeader.split(' ');
+  const bearerToken = bearer[1];
+  req.token = bearerToken;
+  next();
+}
+*/
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
