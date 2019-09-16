@@ -3,8 +3,6 @@ import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-dotenv.config();
-
 const app = express();
 const port = 8080;
 
@@ -21,10 +19,12 @@ app.use(whiteListDomains);
 const authRoute = require('./auth/authenticate');
 const poleRoute = require('./routes/poles');
 
-//  CONNECT DB
-// mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () =>
-//   console.log('connected to db!')
-// );
+dotenv.config();
+
+// CONNECT DB
+mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }, () =>
+  console.log('connected to db!')
+);
 
 // MIDDLEWARE
 app.use(express.json());

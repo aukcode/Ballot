@@ -6,7 +6,7 @@ var __importDefault =
   };
 Object.defineProperty(exports, '__esModule', { value: true });
 const jsonwebtoken_1 = __importDefault(require('jsonwebtoken'));
-module.exports = function(req, res, next) {
+exports.verify = (req, res, next) => {
   const token = req.header('auth-token');
   if (!token) return res.status(401).send('Access Denied');
   try {
