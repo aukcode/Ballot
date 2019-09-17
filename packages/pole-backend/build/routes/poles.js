@@ -1,7 +1,8 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 const router = require('express').Router();
-router.get('/', (req, res) => {
+const verifyToken_1 = require('../auth/verifyToken');
+router.get('/', verifyToken_1.verify, (req, res) => {
   res.json({
     posts: {
       title: 'my first post',

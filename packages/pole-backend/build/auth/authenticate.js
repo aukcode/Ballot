@@ -49,14 +49,14 @@ router.post('/register', (req, res) =>
       req.body.password,
       salt
     );
-    const user = new User({
+    const newUser = new User({
       name: req.body.name,
       email: req.body.email,
       password: hashedPassword,
     });
     try {
-      const savedUser = yield user.save();
-      res.send({ user: user.id });
+      yield newUser.save();
+      res.send({ user: newUser.id });
     } catch (err) {
       res.status(400).send(err);
     }
