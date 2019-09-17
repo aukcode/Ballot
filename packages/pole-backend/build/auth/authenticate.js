@@ -73,12 +73,21 @@ router.post('/login', (req, res) =>
       user.password
     );
     if (!validPass) return res.status(400).send('Invalid password');
+    const payload = { _id: user._id };
     const token = jsonwebtoken_1.default.sign(
-      { _id: user._id },
-      process.env.TOKEN_SECRET
+      payload,
+      process.env.TOKEN_SECRET,
+      {
+        expiresIn: '1h',
+      }
     );
     res.header('auth-token', token).send(token);
     res.send('Logged in!');
+  })
+);
+router.post('/logout', (req, res) =>
+  __awaiter(this, void 0, void 0, function*() {
+    res.send('Logget out!');
   })
 );
 module.exports = router;
