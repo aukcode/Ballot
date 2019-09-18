@@ -35,6 +35,7 @@ var __importDefault =
 Object.defineProperty(exports, '__esModule', { value: true });
 const router = require('express').Router();
 const User = require('../models/User');
+const BlacklistedToken = require('../models/BlacklistedToken');
 const jsonwebtoken_1 = __importDefault(require('jsonwebtoken'));
 const bcryptjs_1 = __importDefault(require('bcryptjs'));
 const Validation_1 = require('../Validation');
@@ -87,7 +88,16 @@ router.post('/login', (req, res) =>
 );
 router.post('/logout', (req, res) =>
   __awaiter(this, void 0, void 0, function*() {
-    res.send('Logget out!');
+    const newBlacklistedToken = new BlacklistedToken({
+      token: req.header('auth-token'),
+    });
+    try {
+      yield newBlacklistedToken.save();
+      res.send('answer');
+    } catch (err) {
+      res.status(400).send(err);
+    }
+    res.send(`Token added to blacklist`);
   })
 );
 module.exports = router;

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/User');
+const BlacklistedToken = require('../models/BlacklistedToken');
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { registerValidation, loginValidation } from '../Validation';
@@ -67,8 +68,19 @@ router.post('/logout', async (req: Request, res: Response) => {
    * https://medium.com/devgorilla/how-to-log-out-when-using-jwt-a8c7823e8a6
    */
 
+  const newBlacklistedToken = new BlacklistedToken({
+    token: req.header('auth-token'),
+  });
+
+  try {
+    await newBlacklistedToken.save();
+    res.send('answer');
+  } catch (err) {
+    res.status(400).send(err);
+  }
+
   // Further, logout in this way should primerely happen on the frontend
-  res.send('Token added to blacklist');
+  res.send(`Token added to blacklist`);
 });
 
 module.exports = router;
