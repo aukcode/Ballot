@@ -10,6 +10,6 @@ export const RouteMap = {
   },
   create: {
     path: '/create',
-    new: '/create/:id',
+    new: '/create/:pole-id',
   },
 };

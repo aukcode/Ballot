@@ -2,11 +2,16 @@ import * as React from 'react';
 import { Pole } from '../../models/Pole';
 import { PoleCardComponent } from './pole-card/PoleCard';
 import { RouteMap } from '../RouteMap';
+import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 
-import { withRouter } from 'react-router-dom';
 import './Create.css';
 
-interface CreateComponentProps {}
+interface CreateComponentRouterProps {}
+
+interface CreateComponentOwnProps {}
+
+type CreateComponentProps = RouteComponentProps<CreateComponentRouterProps> &
+  CreateComponentOwnProps;
 
 const Create = (props: CreateComponentProps) => {
   const mockPole: Pole = {
@@ -32,7 +37,7 @@ const Create = (props: CreateComponentProps) => {
       <p>logged in information user: number of poles:</p>
       <div className="header-my-poles">
         <h1>My Poles</h1>
-        <button>New Pole</button>
+        <Link to={RouteMap.create.new}>New Pole</Link>
       </div>
       <div>
         {mockPoles.map(pole => (
