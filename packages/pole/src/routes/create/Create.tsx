@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Pole } from '../../models/Pole';
 import { PoleCardComponent } from './pole-card/PoleCard';
-import { withRouter } from 'react-router-dom';
+import { RouteMap } from '../RouteMap';
 
+import { withRouter } from 'react-router-dom';
 import './Create.css';
 
 interface CreateComponentProps {}
@@ -29,7 +30,7 @@ const Create = (props: CreateComponentProps) => {
     <div>
       <h1>Profile info</h1>
       <p>logged in information user: number of poles:</p>
-      <div className="hader-my-poles">
+      <div className="header-my-poles">
         <h1>My Poles</h1>
         <button>New Pole</button>
       </div>

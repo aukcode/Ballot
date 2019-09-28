@@ -1,3 +1,4 @@
-.hader-my-poles {
+.header-my-poles {
   display: flex;
+  justify-content: space-evenly;
 }
