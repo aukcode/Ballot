@@ -13,8 +13,9 @@ type PoleCardComponentProps = RouteComponentProps<PoleCardComponentRouteProps> &
 
 const PoleCard = (props: PoleCardComponentProps) => {
   return (
-    <div>
+    <div key={props.pole.id}>
       <h1>{props.pole.title}</h1>
+      <h2>{props.pole.queries[0].question}</h2>
     </div>
   );
 };

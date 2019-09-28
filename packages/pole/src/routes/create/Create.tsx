@@ -24,7 +24,6 @@ const Create = (props: CreateComponentProps) => {
   for (let i = 0; i < 5; i++) {
     mockPoles.push(mockPole);
   }
-  console.log(mockPoles);
 
   return (
     <div>
@@ -34,7 +33,11 @@ const Create = (props: CreateComponentProps) => {
         <h1>My Poles</h1>
         <button>New Pole</button>
       </div>
-      <div>asdf</div>
+      <div>
+        {mockPoles.map(pole => (
+          <PoleCardComponent pole={pole} />
+        ))}
+      </div>
       <h1>My Finalized Poles</h1>
       map finished poles
     </div>
