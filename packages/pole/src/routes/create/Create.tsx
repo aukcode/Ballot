@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Pole } from '../../models/Pole';
-
-import { withRouter } from 'react-router-dom';
-import './Create.css';
 import { PoleCardComponent } from './pole-card/PoleCard';
+import { withRouter } from 'react-router-dom';
+
+import './Create.css';
 
 interface CreateComponentProps {}
 
@@ -34,11 +34,7 @@ const Create = (props: CreateComponentProps) => {
         <h1>My Poles</h1>
         <button>New Pole</button>
       </div>
-      <div>
-        {mockPoles.map(pole => {
-          <PoleCardComponent pole={pole} />;
-        })}
-      </div>
+      <div>asdf</div>
       <h1>My Finalized Poles</h1>
       map finished poles
     </div>

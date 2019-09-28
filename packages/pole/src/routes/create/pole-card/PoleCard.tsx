@@ -8,10 +8,10 @@ interface PoleCardComponentOwnProps {
   pole: Pole;
 }
 
-type PoleCardComponentProps = PoleCardComponentOwnProps &
-  RouteComponentProps<PoleCardComponentRouteProps>;
+type PoleCardComponentProps = RouteComponentProps<PoleCardComponentRouteProps> &
+  PoleCardComponentOwnProps;
 
-const PoleCard = (props: PoleCardComponentOwnProps) => {
+const PoleCard = (props: PoleCardComponentProps) => {
   return (
     <div>
       <h1>{props.pole.title}</h1>
@@ -19,4 +19,4 @@ const PoleCard = (props: PoleCardComponentOwnProps) => {
   );
 };
 
-export const PoleCardComponent = withRouter<PoleCardComponentProps>(PoleCard);
+export const PoleCardComponent = withRouter(PoleCard);
