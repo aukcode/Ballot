@@ -7,14 +7,19 @@ interface HomeProps {}
 
 const Home = (props: HomeProps) => {
   const [pin, setPin] = useState<string>('');
+  const [name, setName] = useState<string>('');
 
   const handlePinChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPin(e.target.value);
     console.log(pin);
   };
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+    console.log(name);
+  };
 
   const handleSubmit = () => {
-    alert(pin);
+    alert(pin + ', ' + name);
   };
 
   return (
@@ -26,7 +31,7 @@ const Home = (props: HomeProps) => {
         </p>
       </div>
 
-      <div className="max-w-sm mx-auto mt-48">
+      <div className="mt-48 mx-3 sm:mx-auto sm:max-w-sm">
         <form onSubmit={handleSubmit}>
           <div className="mb-4 mt-4">
             <label
@@ -44,15 +49,29 @@ const Home = (props: HomeProps) => {
               onChange={handlePinChange}
             />
           </div>
-
-          <div className="flex items-center justify-between">
-            <button
-              className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
+          <div className="mb-4 mt-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="name"
             >
-              ENTER
-            </button>
+              Enter your name
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              id="name"
+              placeholder="Name"
+              value={name}
+              onChange={handleNameChange}
+            />
           </div>
+
+          <button
+            className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            ENTER
+          </button>
         </form>
       </div>
     </div>
