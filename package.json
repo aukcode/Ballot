@@ -2,7 +2,9 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "create-package": "lerna create"
+    "create-package": "lerna create",
+    "test:": "echo \"No tests have been made\" && exit 1",
+    "test:ci": "npm run test"
   },
   "devDependencies": {
     "@types/node": "12.6.2",
