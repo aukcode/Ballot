@@ -3,8 +3,9 @@
   "private": true,
   "scripts": {
     "create-package": "lerna create",
-    "test:": "echo \"No tests have been made\" && exit 1",
-    "test:ci": "npm run test"
+    "test": "npm run bootstrap && npm run test:only",
+    "test:ci": "npm run bootstrap && lerna run test:ci",
+    "test:only": "lerna run test:only"
   },
   "devDependencies": {
     "@types/node": "12.6.2",
