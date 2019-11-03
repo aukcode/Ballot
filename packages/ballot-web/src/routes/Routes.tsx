@@ -5,7 +5,7 @@ import { HomeComponent } from './home/Home';
 import { PoleComponent } from './pole/Pole';
 import { CreateComponent } from './create/Create';
 import { NewPoleComponent } from './create/new-pole/NewPole';
-import { LoginComponent } from './login';
+import { LoginComponent } from './login/login';
 
 export const Routes = () => {
   return (
