@@ -4,6 +4,7 @@ import { RouteMap } from './RouteMap';
 import { HomeComponent } from './home/Home';
 import { PoleComponent } from './pole/Pole';
 import { CreateComponent } from './create/Create';
+import { NewPoleComponent } from './create/new-pole/NewPole';
 
 export const Routes = () => {
   return (
@@ -22,6 +23,11 @@ export const Routes = () => {
         <Route
           path={RouteMap.create.path}
           component={CreateComponent}
+          exact={true}
+        />
+        <Route
+          path={RouteMap.create.new}
+          component={NewPoleComponent}
           exact={true}
         />
         <Route />

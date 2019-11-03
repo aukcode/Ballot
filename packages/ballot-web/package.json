@@ -1,5 +1,5 @@
 {
-  "name": "pole",
+  "name": "ballot-web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,6 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:css": "tailwind build src/app.css -o build/static/css/tailwind-styles.css",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "npm run build && sh deployment/deploy-prod.sh"

@@ -3,13 +3,13 @@ export const RouteMap = {
     path: '/',
   },
   pole: {
-    path: '/pole',
+    path: '/ballot-web',
   },
   login: {
     path: '/login',
   },
   create: {
     path: '/create',
-    new: '/create/:pole-id',
+    new: '/create/:ballot-web-id',
   },
 };

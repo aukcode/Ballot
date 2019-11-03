@@ -26,7 +26,7 @@ const authRoute = require('./auth/authenticate');
 const poleRoute = require('./routes/poles');
 app.use('/api/user', authRoute);
 app.use('/api/poles', poleRoute);
-const hey = 'Hello from pole-backend';
+const hey = 'Hello from ballot-web-backend';
 app.get('/hey', (req, res) => res.json({ hey }).send());
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 //# sourceMappingURL=Main.js.map
