@@ -23,6 +23,7 @@ const Home = (props: HomeProps) => {
     <div>
       <h1>Home, Sweet Home</h1>
       <h2>{state}</h2>
+      <p className="font-bold bg-blue-400 p-5 rounded">Testing Tailwind</p>
     </div>
   );
 };
