@@ -2,11 +2,11 @@ export const RouteMap = {
   home: {
     path: '/',
   },
-  pole: {
-    path: '/ballot-web',
-  },
   login: {
     path: '/login',
+  },
+  pole: {
+    path: '/ballot-web',
   },
   create: {
     path: '/create',
