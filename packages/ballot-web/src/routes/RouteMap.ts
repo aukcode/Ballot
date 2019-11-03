@@ -2,8 +2,9 @@ export const RouteMap = {
   home: {
     path: '/',
   },
-  login: {
-    path: '/login',
+  user: {
+    login: '/login',
+    register: '/register',
   },
   poll: {
     path: '/poll',

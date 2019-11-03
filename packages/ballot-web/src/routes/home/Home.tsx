@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useState } from 'react';
 import { ChangeEvent } from 'react';
+import { RouteMap } from '../RouteMap';
 
 interface HomeProps {}
 
-const Home = (props: HomeProps) => {
+type Props = RouteComponentProps<{}> & HomeProps;
+
+const Home = (props: Props) => {
   const [pin, setPin] = useState<string>('');
   const [name, setName] = useState<string>('');
 
@@ -22,15 +25,56 @@ const Home = (props: HomeProps) => {
     alert(pin + ', ' + name);
   };
 
+  const navigateToLogin = () => {
+    props.history.push(RouteMap.user.login);
+  };
+
+  const navigateToRegister = () => {
+    props.history.push(RouteMap.user.register);
+  };
+
+  const renderNameOrSigninButtons = () => {
+    const loggedOn = false;
+    if (loggedOn) {
+      return (
+        <div className="flex items-center justify-between">
+          <div>
+            <button className="font-bold p-2 ml-4 text-white cursor-pointer bg-orange-500 hover:bg-orange-400 rounded">
+              New Poll
+            </button>
+            <button className="font-bold p-2 ml-4 text-white cursor-pointer">
+              Manage Polls
+            </button>
+          </div>
+          <div>
+            <p className="font-light text-gray-600 text-sm">Logged in as:</p>
+            <p className="font-bold text-white">Øyvind Aukner</p>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex justify-end">
+          <p
+            className="font-medium p-2 cursor-pointer text-white"
+            onClick={navigateToLogin}
+          >
+            Login
+          </p>
+          <p
+            className="font-bold p-2 ml-4 text-white bg-orange-500 hover:bg-orange-400 rounded cursor-pointer"
+            onClick={navigateToRegister}
+          >
+            Sign up
+          </p>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="h-screen">
-      <div className="bg-blue-400 p-4 flex justify-end">
-        <p className="font-medium p-2">Login</p>
-        <p className="font-bold p-2 ml-4 text-white bg-orange-500 hover:bg-orange-400 rounded">
-          Sign up
-        </p>
-      </div>
-
+      <div className="bg-blue-500 p-4">{renderNameOrSigninButtons()}</div>
       <div className="mt-48 mx-3 sm:mx-auto sm:max-w-sm">
         <form onSubmit={handleSubmit}>
           <div className="mb-4 mt-4">

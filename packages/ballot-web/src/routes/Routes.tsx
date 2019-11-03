@@ -6,6 +6,7 @@ import { PollComponent } from './poll/Poll';
 import { CreateComponent } from './create/Create';
 import { NewPollComponent } from './create/new-poll/NewPoll';
 import { LoginComponent } from './login/login';
+import { RegisterCompoent } from './login/register';
 
 export const Routes = () => {
   return (
@@ -17,7 +18,12 @@ export const Routes = () => {
           exact={true}
         />
         <Route
-          path={RouteMap.login.path}
+          path={RouteMap.user.register}
+          component={RegisterCompoent}
+          exact={true}
+        />
+        <Route
+          path={RouteMap.user.login}
           component={LoginComponent}
           exact={true}
         />
