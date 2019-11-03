@@ -47,7 +47,7 @@ const Home = (props: Props) => {
             </button>
           </div>
           <div>
-            <p className="font-light text-gray-600 text-sm">Logged in as:</p>
+            <p className="font-light text-gray-900 text-sm">Logged in as:</p>
             <p className="font-bold text-white">Øyvind Aukner</p>
           </div>
         </div>
