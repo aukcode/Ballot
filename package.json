@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "bootstrap": "npm install && lerna bootstrap --concurrency=2 && lerna run build-css",
     "create-package": "lerna create",
     "test": "npm run bootstrap && npm run test:only",
     "test:ci": "npm run bootstrap && lerna run test:ci",
