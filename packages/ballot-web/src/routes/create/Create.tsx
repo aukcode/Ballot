@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Pole } from '../../models/Pole';
-import { PoleCardComponent } from './pole-card/PoleCard';
+import { Poll } from '../../models/Poll';
+import { PollCardComponent } from './poll-card/PollCard';
 import { RouteMap } from '../RouteMap';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 
@@ -14,10 +14,10 @@ type CreateComponentProps = RouteComponentProps<CreateComponentRouterProps> &
   CreateComponentOwnProps;
 
 const Create = (props: CreateComponentProps) => {
-  const mockPole: Pole = {
+  const mockPoll: Poll = {
     id: 'aldnføaehsrpoaw4borqnøo3url',
-    polePin: 123456,
-    title: 'Test Pole',
+    pollPin: 123456,
+    title: 'Test Poll',
     queries: [
       {
         question: "Who's your daddy",
@@ -26,26 +26,28 @@ const Create = (props: CreateComponentProps) => {
     ],
   };
 
-  const mockPoles = [];
+  const mockPolls = [];
   for (let i = 0; i < 5; i++) {
-    mockPoles.push(mockPole);
+    mockPolls.push(mockPoll);
   }
 
   return (
     <div>
       <h1>Profile info</h1>
-      <p>logged in information user: number of poles:</p>
-      <div className="header-my-poles">
-        <h1>My Poles</h1>
-        <Link to={RouteMap.create.new}>New Pole</Link>
+      <p>logged in information user: number of polls:</p>
+      <div className="header-my-polls">
+        <div className="header-my-polls">
+          <h1>My Polls</h1>
+          <Link to={RouteMap.create.new}>New Poll</Link>
+        </div>
+        <div>
+          {mockPolls.map(poll => (
+            <PollCardComponent poll={poll} />
+          ))}
+        </div>
+        <h1>My Finalized Polls</h1>
+        map finished polls
       </div>
-      <div>
-        {mockPoles.map(pole => (
-          <PoleCardComponent pole={pole} />
-        ))}
-      </div>
-      <h1>My Finalized Poles</h1>
-      map finished poles
     </div>
   );
 };

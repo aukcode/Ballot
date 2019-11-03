@@ -1,29 +1,63 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
-const fetchHey = async (setState: (state: string) => void) => {
-  const result = await fetch('http://localhost:8080/hey').then(res =>
-    res.json()
-  );
-  console.log(result);
-  setState(result.hey);
-};
+import { ChangeEvent } from 'react';
+import { RouteMap } from '../RouteMap';
 
 interface HomeProps {}
 
 const Home = (props: HomeProps) => {
-  const [state, setstate] = useState<string>('Loading...');
+  const [pin, setPin] = useState<string>('');
 
-  useEffect(() => {
-    fetchHey(setstate);
-  }, []);
+  const handlePinChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPin(e.target.value);
+    console.log(pin);
+  };
+
+  const handleSubmit = () => {
+    alert(pin);
+  };
 
   return (
-    <div>
-      <h1>Home, Sweet Home</h1>
-      <h2>{state}</h2>
-      <p className="font-bold bg-blue-400 p-5 rounded">Testing Tailwind</p>
+    <div className="h-screen">
+      <div className="bg-blue-400 p-4 flex justify-end">
+        <p className="font-medium p-2">Login</p>
+        <p className="font-bold p-2 ml-4 text-white bg-orange-500 hover:bg-orange-400 rounded">
+          Sign up
+        </p>
+      </div>
+
+      <div className="max-w-sm mx-auto mt-48 flex justify-center p-6 bg-white rounded-lg shadow-xl">
+        <div className="pt-1">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4 mt-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="pin"
+              >
+                Join a Poll!
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                type="text"
+                id="pin"
+                placeholder="Poll Pin"
+                value={pin}
+                onChange={handlePinChange}
+              />
+            </div>
+
+            <div className="flex items-center justify-between">
+              <button
+                className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                ENTER
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

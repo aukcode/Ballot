@@ -5,11 +5,11 @@ export const RouteMap = {
   login: {
     path: '/login',
   },
-  pole: {
-    path: '/ballot-web',
+  poll: {
+    path: '/poll',
   },
   create: {
     path: '/create',
-    new: '/create/:ballot-web-id',
+    new: '/create/:poll-id',
   },
 };

@@ -1,8 +1,8 @@
 import { Query } from './Query';
 
-export interface Pole {
+export interface Poll {
   id: string;
-  polePin: number;
+  pollPin: number;
   title: string;
   queries: Query[];
 }

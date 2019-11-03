@@ -2,9 +2,9 @@ import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { RouteMap } from './RouteMap';
 import { HomeComponent } from './home/Home';
-import { PoleComponent } from './pole/Pole';
+import { PollComponent } from './poll/Poll';
 import { CreateComponent } from './create/Create';
-import { NewPoleComponent } from './create/new-pole/NewPole';
+import { NewPollComponent } from './create/new-poll/NewPoll';
 import { LoginComponent } from './login/login';
 
 export const Routes = () => {
@@ -22,8 +22,8 @@ export const Routes = () => {
           exact={true}
         />
         <Route
-          path={RouteMap.pole.path}
-          component={PoleComponent}
+          path={RouteMap.poll.path}
+          component={PollComponent}
           exact={true}
         />
         <Route
@@ -33,7 +33,7 @@ export const Routes = () => {
         />
         <Route
           path={RouteMap.create.new}
-          component={NewPoleComponent}
+          component={NewPollComponent}
           exact={true}
         />
         <Route />
