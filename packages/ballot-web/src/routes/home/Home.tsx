@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ChangeEvent } from 'react';
-import { RouteMap } from '../RouteMap';
 
 interface HomeProps {}
 
