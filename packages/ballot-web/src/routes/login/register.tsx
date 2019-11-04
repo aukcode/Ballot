@@ -2,6 +2,8 @@ import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useEffect } from 'react';
+import { useAuth } from '../../api/auth/AuthContext';
+import { RouteMap } from '../RouteMap';
 const voteHere = require('./vote-here.jpg');
 
 interface RegisterProps {}
@@ -13,22 +15,24 @@ const Register = (props: Props) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
+  const { signIn } = useAuth();
 
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = (e: FormEvent) => {
-    // e.preventDefault();
-    // Fetch register API POST request
-    console.log(name, email, password);
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    const result = await fetch('/api/users/register/', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+      }),
+    });
+    //.then(signIn(Response.arguments.refreshToken, Response.arguments.user);
+    console.log(result);
   };
 
   useEffect(() => {
@@ -62,7 +66,9 @@ const Register = (props: Props) => {
                 type="text"
                 placeholder="Name"
                 value={name}
-                onChange={handleNameChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setName(e.target.value)
+                }
               />
             </div>
             <div className="mb-4 mt-4">
@@ -77,7 +83,9 @@ const Register = (props: Props) => {
                 type="email"
                 placeholder="Email adress"
                 value={email}
-                onChange={handleEmailChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setEmail(e.target.value);
+                }}
               />
             </div>
             <div className="mb-6">
@@ -92,7 +100,9 @@ const Register = (props: Props) => {
                 type="password"
                 placeholder="******************"
                 value={password}
-                onChange={handlePasswordChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setPassword(e.target.value);
+                }}
               />
             </div>
             <div className="flex items-center justify-between">

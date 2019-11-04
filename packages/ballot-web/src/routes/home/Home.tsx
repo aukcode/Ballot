@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { ChangeEvent } from 'react';
 import { RouteMap } from '../RouteMap';
+import { useAuth } from '../../api/auth/AuthContext';
 
 interface HomeProps {}
 
@@ -11,18 +12,10 @@ type Props = RouteComponentProps<{}> & HomeProps;
 const Home = (props: Props) => {
   const [pin, setPin] = useState<string>('');
   const [name, setName] = useState<string>('');
+  const { isSignedIn, signOut, user } = useAuth();
 
-  const handlePinChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPin(e.target.value);
-    console.log(pin);
-  };
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-    console.log(name);
-  };
-
-  const handleSubmit = () => {
-    alert(pin + ', ' + name);
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
   };
 
   const navigateToLogin = () => {
@@ -34,21 +27,30 @@ const Home = (props: Props) => {
   };
 
   const renderNameOrSigninButtons = () => {
-    const loggedOn = false;
-    if (loggedOn) {
+    if (isSignedIn) {
       return (
         <div className="flex items-center justify-between">
           <div>
-            <button className="font-bold p-2 ml-4 text-white cursor-pointer bg-orange-500 hover:bg-orange-400 rounded">
+            <button className="font-bold p-2 text-white cursor-pointer bg-orange-500 hover:bg-orange-400 rounded">
               New Poll
             </button>
-            <button className="font-bold p-2 ml-4 text-white cursor-pointer">
+            <button className="font-bold p-2 ml-6 text-white cursor-pointer">
               Manage Polls
             </button>
           </div>
-          <div>
-            <p className="font-light text-gray-900 text-sm">Logged in as:</p>
-            <p className="font-bold text-white">Øyvind Aukner</p>
+          <div className="flex">
+            <div>
+              <p className="font-light text-gray-900 text-sm">Logged in as:</p>
+              <p className="font-bold text-white">
+                {user ? user.name : 'incognito'}
+              </p>
+            </div>
+            <button
+              className="p-2 ml-6 cursor-pointer text-white bg-gray-800 hover:bg-gray-700 rounded"
+              onClick={signOut}
+            >
+              Log out
+            </button>
           </div>
         </div>
       );
@@ -59,7 +61,7 @@ const Home = (props: Props) => {
             className="font-medium p-2 cursor-pointer text-white"
             onClick={navigateToLogin}
           >
-            Login
+            Log in
           </p>
           <p
             className="font-bold p-2 ml-4 text-white bg-orange-500 hover:bg-orange-400 rounded cursor-pointer"
@@ -74,7 +76,7 @@ const Home = (props: Props) => {
 
   return (
     <div className="h-screen">
-      <div className="bg-blue-500 p-4">{renderNameOrSigninButtons()}</div>
+      <div className="bg-blue-500 px-8 py-4">{renderNameOrSigninButtons()}</div>
       <div className="mt-48 mx-3 sm:mx-auto sm:max-w-sm">
         <form onSubmit={handleSubmit}>
           <div className="mb-4 mt-4">
@@ -90,7 +92,9 @@ const Home = (props: Props) => {
               id="pin"
               placeholder="Poll Pin"
               value={pin}
-              onChange={handlePinChange}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setPin(e.target.value)
+              }
             />
           </div>
           <div className="mb-4 mt-4">
@@ -106,7 +110,9 @@ const Home = (props: Props) => {
               id="name"
               placeholder="Name"
               value={name}
-              onChange={handleNameChange}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setName(e.target.value)
+              }
             />
           </div>
 

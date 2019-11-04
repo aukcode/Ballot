@@ -1,27 +1,32 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { RouteMap } from '../RouteMap';
+import { User } from '../../models/User';
+import { useAuth } from '../../api/auth/AuthContext';
 const voteHere = require('./vote-here.jpg');
 
 interface LoginProps {}
 
 type Props = LoginProps & RouteComponentProps<{}>;
 
+const mockUser: User = {
+  name: 'Douglas Adams',
+  email: 'doug@adams.sexy',
+};
+
 const Login = (props: Props) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const { signIn } = useAuth();
 
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = () => {
-    console.log(email + password);
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    // Check if user exists and fetch the user
+    // const fetchedUser: User = await fetch(`/api/users/${email}`);
+    const token = 'SUPER_SECRET_TOKEN';
+    signIn(token, { name: mockUser.name, email });
+    props.history.push(RouteMap.home.path);
   };
 
   const navigateToRegister = () => {
@@ -52,7 +57,9 @@ const Login = (props: Props) => {
                 id="email"
                 placeholder="Email"
                 value={email}
-                onChange={handleEmailChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setEmail(e.target.value)
+                }
               />
             </div>
             <div className="mb-6">
@@ -67,7 +74,9 @@ const Login = (props: Props) => {
                 type="password"
                 placeholder="******************"
                 value={password}
-                onChange={handlePasswordChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setPassword(e.target.value)
+                }
               />
             </div>
             <div className="flex items-center justify-between">
