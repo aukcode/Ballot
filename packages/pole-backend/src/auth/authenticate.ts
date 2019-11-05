@@ -6,6 +6,12 @@ import bcrypt from 'bcryptjs';
 import { registerValidation, loginValidation } from '../Validation';
 import { Request, Response } from 'express';
 
+// GET all
+// router.get('/', async (req: Request, res: Response) => {
+//   const users = 'all the users'; // await User.findAll();
+//   res.status(200).send(users);
+// });
+
 router.post('/register', async (req: Request, res: Response) => {
   // LETS VALIDATE BEFORE WE MAKE A USER
   const { error } = registerValidation(req.body);
@@ -26,7 +32,7 @@ router.post('/register', async (req: Request, res: Response) => {
 
   try {
     await newUser.save();
-    res.send({ user: newUser.id });
+    res.send({ user: newUser });
   } catch (err) {
     res.status(400).send(err);
   }
