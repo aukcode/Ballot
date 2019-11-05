@@ -13,8 +13,9 @@
   - this
   - bind
   - dependency injection
-  -
+  - git page ?? include the tips for logging etc and replace the onenote page
 - issue tracker board
 - Eurovision scoring board for parties
 - Forholdsapp. Liste med ting som kan gjøres og måter de kan gjøres på etc.
   Random tidspunkt for når man får en random sammensetning: make it work!
+- a utility package in the monorepo

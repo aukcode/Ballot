@@ -30,8 +30,13 @@ const Register = (props: Props) => {
         email,
         password,
       }),
-    });
-    //.then(signIn(Response.arguments.refreshToken, Response.arguments.user);
+    })
+      .then(response => response.json())
+      .then(user => {
+        signIn('Response.arguments.refreshToken', user);
+      })
+      .then(user => console.log(user));
+    // Don't forget to catch any errors that may be thrown by fetch, otherwise they will be dropped silently.
     console.log(result);
   };
 
