@@ -2,7 +2,7 @@
 import Joi from '@hapi/joi';
 
 // Register Validation
-export const registerValidation = data => {
+export const validateNewUser = data => {
   const Schema = {
     name: Joi.string()
       .min(6)

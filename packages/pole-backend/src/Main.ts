@@ -32,4 +32,4 @@ app.use('/api/polls', require('./routes/polls'));
 const hey = 'Hello from ballot-web-backend';
 app.get('/hey', (req: Request, res: Response) => res.json({ hey }).send());
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Listening on port ${port}!`));

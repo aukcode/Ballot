@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const User = require('../models/User');
-const BlacklistedToken = require('../models/BlacklistedToken');
+const User = require('../model/User');
+const BlacklistedToken = require('../model/BlacklistedToken');
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import { registerValidation, loginValidation } from '../Validation';
+import { validateNewUser, loginValidation } from '../Validation';
 import { Request, Response } from 'express';
 
 // GET all
@@ -14,7 +14,7 @@ import { Request, Response } from 'express';
 
 router.post('/register', async (req: Request, res: Response) => {
   // LETS VALIDATE BEFORE WE MAKE A USER
-  const { error } = registerValidation(req.body);
+  const { error } = validateNewUser(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   const emailExists = await User.findOne({ email: req.body.email });
@@ -46,11 +46,14 @@ router.post('/login', async (req: Request, res: Response) => {
 
   // Check if the email exists
   const user = await User.findOne({ email: req.body.email });
+  console.log('findOne completed. found or not found');
+  console.log(user);
   if (!user) return res.status(400).send('Email is not found');
-
   // Check password
+  console.log('check password');
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) return res.status(400).send('Invalid password');
+  console.log('password found');
 
   // Create and assign a token
   const payload = { _id: user._id };
