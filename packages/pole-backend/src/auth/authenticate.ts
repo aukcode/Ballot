@@ -1,16 +1,17 @@
+import { verify } from './verifyToken';
 const router = require('express').Router();
-const User = require('../model/User');
-const BlacklistedToken = require('../model/BlacklistedToken');
+const User = require('../models/User');
+const BlacklistedToken = require('../models/BlacklistedToken');
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import { validateNewUser, loginValidation } from '../Validation';
+import { validateNewUser, validateLoginCredentials } from '../Validation';
 import { Request, Response } from 'express';
 
 // GET all
-// router.get('/', async (req: Request, res: Response) => {
-//   const users = 'all the users'; // await User.findAll();
-//   res.status(200).send(users);
-// });
+router.get('/', verify, async (req: Request, res: Response) => {
+  const users = await User.find();
+  res.status(200).send(users);
+});
 
 router.post('/register', async (req: Request, res: Response) => {
   // LETS VALIDATE BEFORE WE MAKE A USER
@@ -41,26 +42,23 @@ router.post('/register', async (req: Request, res: Response) => {
 // LOGIN
 router.post('/login', async (req: Request, res: Response) => {
   // LETS VALIDATE BEFORE WE LOGIN A USER
-  const { error } = loginValidation(req.body);
+  const { error } = validateLoginCredentials(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   // Check if the email exists
   const user = await User.findOne({ email: req.body.email });
-  console.log('findOne completed. found or not found');
-  console.log(user);
   if (!user) return res.status(400).send('Email is not found');
+
   // Check password
-  console.log('check password');
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) return res.status(400).send('Invalid password');
-  console.log('password found');
 
   // Create and assign a token
   const payload = { _id: user._id };
   const token = jwt.sign(payload, process.env.TOKEN_SECRET, {
     expiresIn: '1h',
   });
-  res.header('auth-token', token).send(token);
+  res.header('authorization', token).send(token);
 
   res.send('Logged in!');
 });
@@ -78,7 +76,7 @@ router.post('/logout', async (req: Request, res: Response) => {
    */
 
   const newBlacklistedToken = new BlacklistedToken({
-    token: req.header('auth-token'),
+    token: req.header('authorization'),
   });
 
   try {

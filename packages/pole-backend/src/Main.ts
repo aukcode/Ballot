@@ -23,11 +23,11 @@ app.use(express.json());
 
 // IMPORT ROUTES
 const authRoute = require('./auth/authenticate');
-const pollsRoute = require('./routes/polls');
+const pollsRoute = require('./routes/Polls');
 
 // ROUTES
 app.use('/api/users', authRoute);
-app.use('/api/polls', require('./routes/polls'));
+app.use('/api/polls', pollsRoute);
 
 const hey = 'Hello from ballot-web-backend';
 app.get('/hey', (req: Request, res: Response) => res.json({ hey }).send());

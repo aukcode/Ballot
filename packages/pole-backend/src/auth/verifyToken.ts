@@ -10,8 +10,9 @@ export const verify = (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.header('auth-token');
-  if (!token) return res.status(401).send('Access Denied');
+  const token = req.header('authorization');
+  if (!token)
+    return res.status(401).send('Access Denied. No authorization header set');
 
   try {
     const verified = jwt.verify(token, process.env.TOKEN_SECRET);

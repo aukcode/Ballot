@@ -18,7 +18,7 @@ export const validateNewUser = data => {
   return Joi.validate(data, Schema);
 };
 
-export const loginValidation = data => {
+export const validateLoginCredentials = data => {
   const Schema = {
     email: Joi.string()
       .min(6)
