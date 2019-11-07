@@ -41,6 +41,8 @@ router.post('/register', async (req: Request, res: Response) => {
 
 // LOGIN
 router.post('/login', async (req: Request, res: Response) => {
+  console.log(`email: ${req.body.email}`);
+  console.log(`password: ${req.body.password}`);
   // LETS VALIDATE BEFORE WE LOGIN A USER
   const { error } = validateLoginCredentials(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -58,9 +60,8 @@ router.post('/login', async (req: Request, res: Response) => {
   const token = jwt.sign(payload, process.env.TOKEN_SECRET, {
     expiresIn: '1h',
   });
-  res.header('authorization', token).send(token);
-
-  res.send('Logged in!');
+  res.setHeader('authorization', token);
+  res.send(user);
 });
 
 // LOGOUT

@@ -7,6 +7,8 @@ const port = 8080;
 
 const whiteListDomains = (req: Request, res: Response, next: NextFunction) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Expose-Headers', 'authorization');
   next();
 };
 

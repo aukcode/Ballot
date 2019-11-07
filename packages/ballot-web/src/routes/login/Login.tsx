@@ -2,7 +2,6 @@ import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { RouteMap } from '../RouteMap';
-import { User } from '../../models/User';
 import { useAuth } from '../../api/auth/AuthContext';
 const voteHere = require('./vote-here.jpg');
 
@@ -10,27 +9,48 @@ interface LoginProps {}
 
 type Props = LoginProps & RouteComponentProps<{}>;
 
-const mockUser: User = {
-  name: 'Douglas Adams',
-  email: 'doug@adams.sexy',
-};
-
 const Login = (props: Props) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<boolean>(false);
   const { signIn } = useAuth();
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // Check if user exists and fetch the user
-    // const fetchedUser: User = await fetch(`/api/users/${email}`);
-    const token = 'SUPER_SECRET_TOKEN';
-    signIn(token, { name: mockUser.name, email });
-    props.history.push(RouteMap.home.path);
+    const result = await fetch('http://localhost:8080/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+    const token = result.headers.get('authorization') || '';
+    result.json().then(user => {
+      signIn(token, { name: user.name, email: user.email });
+    });
+
+    if (result.status === 200) {
+      props.history.push(RouteMap.home.path);
+    } else {
+      setError(true);
+    }
   };
 
   const navigateToRegister = () => {
     props.history.push(RouteMap.user.register + '?email=' + email);
+  };
+
+  const renderErrorMessage = () => {
+    if (error) {
+      return (
+        <p className="text-red-600 font-bold text-sm text-center">
+          A valid email and password must be provided
+        </p>
+      );
+    }
   };
 
   return (
@@ -57,9 +77,10 @@ const Login = (props: Props) => {
                 id="email"
                 placeholder="Email"
                 value={email}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setEmail(e.target.value)
-                }
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setEmail(e.target.value);
+                  setError(false);
+                }}
               />
             </div>
             <div className="mb-6">
@@ -74,10 +95,12 @@ const Login = (props: Props) => {
                 type="password"
                 placeholder="******************"
                 value={password}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setPassword(e.target.value)
-                }
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setPassword(e.target.value);
+                  setError(false);
+                }}
               />
+              {renderErrorMessage()}
             </div>
             <div className="flex items-center justify-between">
               <button
