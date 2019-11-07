@@ -12,7 +12,11 @@ export const verify = (
 ) => {
   const token = req.header('authorization');
   if (!token)
-    return res.status(401).send('Access Denied. No authorization header set');
+    return res
+      .status(401)
+      .send(
+        "Access Denied. No access token passed. Access tokens must be passed in the 'authorization' header"
+      );
 
   try {
     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
