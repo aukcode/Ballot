@@ -1,44 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What is this
 
-## Available Scripts
+## What is it made with
 
-In the project directory, you can run:
+## Install and run
 
-### `npm start`
+# NOTES
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Further dev
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- Sentry (use Capra consulting sentry app?) They also had something for docker
+  - [sentry-utils-js](https://github.com/capraconsulting/sentry-utils-js)
 
-### `npm test`
+## Pages
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Landing page
 
-### `npm run build`
+Login page / modal
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Admin page for creating and managing elections/voting sessions
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Report modal
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Answer page for answering questions
 
-### `npm run eject`
+## Implementation
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Login and session management with JWT and joi validation ([https://medium.com/@rossbulat/joi-for-node-exploring-javascript-object-schema-validation-50dd4b8e1b0f](https://medium.com/@rossbulat/joi-for-node-exploring-javascript-object-schema-validation-50dd4b8e1b0f))
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+A pin is made for each voting session. Users can join by providing this pin. Only when active.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Users can log in or just provide a pseudonym to join a session
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Security and GDPR concerns
 
-## Learn More
+User passwords should be stored as salted hashes.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Names should only be associated with polls, not answers
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+OWASP Top 10 should be consulted
+
+## Estimation
+
+**Week 1:** ~~Set up the monorepo~~, ~~commitizen~~+scope(+icons?), ~~lerna~~, ~~react router,~~ ~~prettier~~, ~~pretty-quick~~, ~~husky~~, ~~deployment~~, ~~CI~~, ~~mongo~~, ~~mongoose~~, ~~add~~ ~~petterive~~
+
+**Week 2:** ~~Implement session management with JWT~~. ~~Design the general page layout.~~
+
+**Week 3:** Implement the create page with poll management
+
+**Week 4:** Implement joining and voting/answering. Setup testing. TSLint.
+
+**Week 5:** Create a component library in the monorepo. Make Button, Card and essential components
+
+**Week 6:** README.md, testing and deployment
+
+**Week 7:** Finalising. Fixing.
