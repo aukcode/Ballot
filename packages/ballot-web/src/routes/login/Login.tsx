@@ -2,7 +2,6 @@ import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { RouteMap } from '../RouteMap';
-import { User } from '../../models/User';
 import { useAuth } from '../../api/auth/AuthContext';
 const voteHere = require('./vote-here.jpg');
 
@@ -10,23 +9,34 @@ interface LoginProps {}
 
 type Props = LoginProps & RouteComponentProps<{}>;
 
-const mockUser: User = {
-  name: 'Douglas Adams',
-  email: 'doug@adams.sexy',
-};
-
 const Login = (props: Props) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { signIn } = useAuth();
+  const { signIn, user } = useAuth();
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // Check if user exists and fetch the user
-    // const fetchedUser: User = await fetch(`/api/users/${email}`);
-    const token = 'SUPER_SECRET_TOKEN';
-    signIn(token, { name: mockUser.name, email });
-    props.history.push(RouteMap.home.path);
+    await fetch('http://localhost:8080/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    })
+      .then(response => console.log(response.headers.get('authorization')))
+      // .then(user =>
+      //   signIn(user.headers.get('authorization'), {
+      //     name: user.name,
+      //     email: user.email,
+      //   })
+      // )
+      .catch(err => console.log(`Error catch on fetch: ${err}`));
+
+    console.log(user);
+    // props.history.push(RouteMap.home.path);
   };
 
   const navigateToRegister = () => {
