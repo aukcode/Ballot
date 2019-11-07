@@ -12,6 +12,7 @@ type Props = LoginProps & RouteComponentProps<{}>;
 const Login = (props: Props) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<boolean>(false);
   const { signIn } = useAuth();
 
   const handleSubmit = async (e: FormEvent) => {
@@ -34,12 +35,22 @@ const Login = (props: Props) => {
     if (result.status === 200) {
       props.history.push(RouteMap.home.path);
     } else {
-      alert('Have you remembered to submit any data?');
+      setError(true);
     }
   };
 
   const navigateToRegister = () => {
     props.history.push(RouteMap.user.register + '?email=' + email);
+  };
+
+  const renderErrorMessage = () => {
+    if (error) {
+      return (
+        <p className="text-red-600 font-bold text-sm text-center">
+          A valid email and password must be provided
+        </p>
+      );
+    }
   };
 
   return (
@@ -66,9 +77,10 @@ const Login = (props: Props) => {
                 id="email"
                 placeholder="Email"
                 value={email}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setEmail(e.target.value)
-                }
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setEmail(e.target.value);
+                  setError(false);
+                }}
               />
             </div>
             <div className="mb-6">
@@ -83,10 +95,12 @@ const Login = (props: Props) => {
                 type="password"
                 placeholder="******************"
                 value={password}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setPassword(e.target.value)
-                }
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  setPassword(e.target.value);
+                  setError(false);
+                }}
               />
+              {renderErrorMessage()}
             </div>
             <div className="flex items-center justify-between">
               <button
