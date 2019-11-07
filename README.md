@@ -2,11 +2,15 @@
 
 ## What is this
 
-## What is it made with
+This is a monorepo for my current maintained projects.
 
 ## Install and run
 
-# Project ideas
+A bootstrap script has been made that takes care off all setup:
+
+`$ npm run bootstrap`
+
+# Project ideas for the future
 
 - Create a boilerplate README
 - aukcode home: freelancing site. \*.aukcode can be used to host other stuff
