@@ -12,11 +12,11 @@ type Props = LoginProps & RouteComponentProps<{}>;
 const Login = (props: Props) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { signIn, user } = useAuth();
+  const { signIn } = useAuth();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await fetch('http://localhost:8080/api/users/login', {
+    const result = await fetch('http://localhost:8080/api/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -25,18 +25,13 @@ const Login = (props: Props) => {
         email,
         password,
       }),
-    })
-      .then(response => console.log(response.headers.get('authorization')))
-      // .then(user =>
-      //   signIn(user.headers.get('authorization'), {
-      //     name: user.name,
-      //     email: user.email,
-      //   })
-      // )
-      .catch(err => console.log(`Error catch on fetch: ${err}`));
+    });
+    const token = result.headers.get('authorization') || '';
+    result.json().then(user => {
+      signIn(token, { name: user.name, email: user.email });
+    });
 
-    console.log(user);
-    // props.history.push(RouteMap.home.path);
+    props.history.push(RouteMap.home.path);
   };
 
   const navigateToRegister = () => {
