@@ -31,7 +31,11 @@ const Login = (props: Props) => {
       signIn(token, { name: user.name, email: user.email });
     });
 
-    props.history.push(RouteMap.home.path);
+    if (result.status === 200) {
+      props.history.push(RouteMap.home.path);
+    } else {
+      alert('Have you remembered to submit any data?');
+    }
   };
 
   const navigateToRegister = () => {

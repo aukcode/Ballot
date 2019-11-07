@@ -6,7 +6,7 @@ import { PollComponent } from './poll/Poll';
 import { CreateComponent } from './create/Create';
 import { NewPollComponent } from './create/new-poll/NewPoll';
 import { LoginComponent } from './login/Login';
-import { RegisterCompoent } from './login/register';
+import { RegisterComponent } from './login/Register';
 import { LoginGuard } from './login/LoginGuard';
 
 export const Routes = () => {
@@ -20,7 +20,7 @@ export const Routes = () => {
         />
         <Route
           path={RouteMap.user.register}
-          component={RegisterCompoent}
+          component={RegisterComponent}
           exact={true}
         />
         <Route

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { ChangeEvent } from 'react';
 import { RouteMap } from '../RouteMap';
 import { useAuth } from '../../api/auth/AuthContext';
