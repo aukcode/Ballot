@@ -2,7 +2,11 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "create-package": "lerna create"
+    "bootstrap": "npm install && lerna bootstrap --concurrency=2 && lerna run build-css",
+    "create-package": "lerna create",
+    "test": "npm run bootstrap && npm run test:only",
+    "test:ci": "npm run bootstrap && lerna run test:ci",
+    "test:only": "lerna run test:only"
   },
   "devDependencies": {
     "@types/node": "12.6.2",

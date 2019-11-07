@@ -2,7 +2,12 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: circleci/node:8.12
+
+    working_directory: ~/repo
+
+    environment:
+      NODE_ENV: development
 
     steps:
       - checkout
