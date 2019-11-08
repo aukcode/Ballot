@@ -4,6 +4,8 @@
 
 This is a monorepo for my current maintained projects.
 
+Go to the **packages** directory for individual projects.
+
 ## Install and run
 
 A bootstrap script has been made that takes care off all setup:
