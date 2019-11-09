@@ -12,6 +12,8 @@ A bootstrap script has been made that takes care off all setup:
 
 `$ npm run bootstrap`
 
+After that, projects can be run from its respective directory.
+
 # Project ideas for the future
 
 - Create a boilerplate README
