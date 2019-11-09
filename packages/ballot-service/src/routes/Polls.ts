@@ -48,7 +48,12 @@ function generate(n) {
   var min = max / 10; // Math.pow(10, n) basically
   var number = Math.floor(Math.random() * (max - min + 1)) + min;
 
-  return ('' + number).substring(add);
+  const result = ('' + number).substring(add);
+  if (result.length < 6) {
+    return generate(6);
+  } else {
+    return result;
+  }
 }
 
 module.exports = router;
