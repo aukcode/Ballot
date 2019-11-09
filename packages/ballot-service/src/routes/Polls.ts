@@ -30,4 +30,5 @@ router.delete('/:id', (req: Request, res: Response) => {
   const poll = req.body.poll;
   res.status(200).send(`poll: ${poll}`);
 });
+
 module.exports = router;
