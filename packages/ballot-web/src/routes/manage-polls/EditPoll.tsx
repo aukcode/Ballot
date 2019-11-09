@@ -48,6 +48,7 @@ type CreateComponentProps = RouteComponentProps<CreateComponentRouterProps> &
   CreateComponentOwnProps;
 
 const EditPoll = (props: CreateComponentProps) => {
+  const [pollTitle, setPollTitle] = useState<string>('test');
   const [newQuestion, setNewQuestion] = useState<string>();
   const [questions, setQuestions] = useState<Question[]>(mockQuestions);
   const [newOption, setNewOption] = useState<string>('');
@@ -58,22 +59,74 @@ const EditPoll = (props: CreateComponentProps) => {
 
   const isCreatingNewPoll = props.match.params.pollId === 'new';
 
-  const handleOnNewQuestionSubmitted = (e: FormEvent) => {
+  const handleOnPollSaveClicked = (e: FormEvent) => {
     e.preventDefault();
+    if (props.match.params.pollId === 'new') {
+      postNewPoll();
+    } else {
+      patchPoll();
+    }
+  };
+
+  const postNewPoll = async () => {
     try {
-      // fetch
-      if (newQuestion && newQuestion.length > 0) {
-        setQuestions([
-          ...questions,
-          { question: newQuestion, options, id: 'asdfasdfasdf' },
-        ]);
-        setNewQuestion('');
-        setOptions([]);
-        document.getElementById('new-question-form')!.style.border = '';
-      }
+      const result = await fetch('http://localhost:8080/api/polls/new', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: pollTitle,
+          questions,
+        }),
+      }).catch(err => console.log(err));
     } catch (err) {
-      console.log('ohoi there was an error captain!');
+      console.log('ohoi there was an error with the server');
       console.log(err);
+    }
+  };
+
+  const patchPoll = async () => {
+    const pollId = props.match.params.pollId;
+    try {
+      const result = await fetch(`http://localhost:8080/api/polls/${pollId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: pollId,
+          title: newQuestion,
+          questions,
+        }),
+      }).catch(err => console.log(err));
+    } catch (err) {
+      console.log('ohoi there was an error with the server');
+      console.log(err);
+    }
+  };
+
+  const handleOnQuestionSubmitted = async (e: FormEvent) => {
+    e.preventDefault();
+    const result = await fetch('', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: newQuestion,
+        questions,
+      }),
+    }).catch(err => console.log(err));
+
+    if (newQuestion && newQuestion.length > 0) {
+      setQuestions([
+        ...questions,
+        { question: newQuestion, options, id: 'asdfasdfasdf' },
+      ]);
+      setNewQuestion('');
+      setOptions([]);
+      document.getElementById('new-question-form')!.style.border = '';
     }
   };
 
@@ -125,7 +178,7 @@ const EditPoll = (props: CreateComponentProps) => {
     // label with input.
     return (
       <form
-        onSubmit={handleOnNewQuestionSubmitted}
+        onSubmit={handleOnQuestionSubmitted}
         className="shadow rounded-lg p-4"
         id="new-question-form"
       >
@@ -215,12 +268,24 @@ const EditPoll = (props: CreateComponentProps) => {
           )}
           {questions.length > 0 && (
             <button
+              onClick={handleOnPollSaveClicked}
               className="py-2 px-8 w-auto bg-green-500 hover:bg-green-600 font-bold text-white rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Save Poll
             </button>
           )}
+        </div>
+
+        <div>
+          <input
+            className="w-full py-4 px-2 mt-8 border-b-4 focus:border-blue-400 text-2xl focus:outline-none"
+            type="text"
+            value={pollTitle}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setPollTitle(e.target.value)
+            }
+          />
         </div>
 
         <div className="my-4">{renderQuestions()}</div>

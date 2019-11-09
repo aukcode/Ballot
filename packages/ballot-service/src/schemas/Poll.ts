@@ -8,10 +8,10 @@ const pollSchema = new mongoose.Schema({
     max: 255,
   },
   pollPin: {
-    type: String,
+    type: Number,
     required: true,
-    max: 255,
-    min: 6,
+    max: 999999,
+    min: 100000,
   },
   title: {
     type: String,
