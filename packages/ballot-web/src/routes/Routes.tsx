@@ -7,40 +7,42 @@ import { LoginComponent } from './login/Login';
 import { RegisterComponent } from './login/Register';
 import { LoginGuard } from './login/LoginGuard';
 import { ManagePollsComponent } from './manage-polls/ManagePolls';
+import { NavbarContainer } from './navbar/NavbarContainer';
 
 export const Routes = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route
-          path={RouteMap.home.path}
-          component={HomeComponent}
-          exact={true}
-        />
-        <Route
-          path={RouteMap.user.register}
-          component={RegisterComponent}
-          exact={true}
-        />
-        <Route
-          path={RouteMap.user.login}
-          component={LoginComponent}
-          exact={true}
-        />
-        <LoginGuard>
+      <NavbarContainer>
+        <Switch>
           <Route
-            path={RouteMap.manage.path}
-            component={ManagePollsComponent}
+            path={RouteMap.home.path}
+            component={HomeComponent}
             exact={true}
           />
           <Route
-            path={RouteMap.manage.edit.path}
-            component={EditPollComponent}
+            path={RouteMap.user.register}
+            component={RegisterComponent}
             exact={true}
           />
-        </LoginGuard>
-        <Route />
-      </Switch>
+          <Route
+            path={RouteMap.user.login}
+            component={LoginComponent}
+            exact={true}
+          />
+          <LoginGuard>
+            <Route
+              path={RouteMap.manage.path}
+              component={ManagePollsComponent}
+              exact={true}
+            />
+            <Route
+              path={RouteMap.manage.edit.path}
+              component={EditPollComponent}
+              exact={true}
+            />
+          </LoginGuard>
+        </Switch>
+      </NavbarContainer>
     </BrowserRouter>
   );
 };
