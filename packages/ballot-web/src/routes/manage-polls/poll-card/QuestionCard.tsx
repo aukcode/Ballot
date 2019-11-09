@@ -24,13 +24,13 @@ export const QuestionCard = (props: PollCardProps) => {
           <a href="#new-question-form">
             <i
               onClick={updateQuestion}
-              className="fas fa-pen opacity-50 hover:opacity-75 cursor-pointer"
+              className="fas fa-pen fa-lg opacity-50 hover:opacity-75 cursor-pointer"
             />
           </a>
           <a>
             <i
               onClick={removeQuestion}
-              className="fas fa-trash ml-4 opacity-50 hover:opacity-75 cursor-pointer"
+              className="fas fa-trash ml-8 fa-lg opacity-50 hover:opacity-75 cursor-pointer"
             />
           </a>
         </div>

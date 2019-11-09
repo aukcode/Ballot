@@ -163,7 +163,7 @@ const EditPoll = (props: CreateComponentProps) => {
                     removeOption(option);
                   }}
                   className="far fa-times-circle fa-2x text-red-300 hover:text-red-400 cursor-pointer"
-                ></i>
+                />
               </span>
             ))}
           </div>

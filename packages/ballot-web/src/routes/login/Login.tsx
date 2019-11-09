@@ -36,7 +36,7 @@ const Login = (props: Props) => {
       });
       const token = result.headers.get('authorization') || '';
       result.json().then(user => {
-        signIn(token, { name: user.name, email: user.email });
+        signIn(token, { id: user._id, name: user.name, email: user.email });
       });
 
       if (result.status === 200) {
@@ -78,7 +78,7 @@ const Login = (props: Props) => {
         backgroundImage: `url(${voteHere})`,
       }}
     >
-      <div className="flex justify-center items-'center h-screen">
+      <div className="flex justify-center items-center h-screen">
         <div className="mx-3 w-full sm:mx-auto w-auto md:w-1/2 lg:w-1/3 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           {/*TODO: implement Passport / OAuth SSO*/}
           <form onSubmit={handleSubmit}>
