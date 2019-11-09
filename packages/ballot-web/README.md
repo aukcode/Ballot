@@ -72,7 +72,7 @@ Users can log in or just provide a pseudonym to join a session
 
 **Week 4:** Implement joining and voting/answering. Setup testing. TSLint.
 
-**Week 5:** Create a component library in the monorepo. Make Button, Card and essential components
+**Week 5:** EditPoll a component library in the monorepo. Make Button, Card and essential components
 
 **Week 6:** ~~README.md~~, testing and deployment
 

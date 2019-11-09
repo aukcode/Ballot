@@ -1,19 +1,18 @@
 import * as React from 'react';
 import { Poll } from '../../models/Poll';
 import { PollCardComponent } from './poll-card/PollCard';
-import { RouteMap } from '../RouteMap';
 import { withRouter, RouteComponentProps, Link } from 'react-router-dom';
 
-import './Create.css';
-
-interface CreateComponentRouterProps {}
+interface CreateComponentRouterProps {
+  pollId: string;
+}
 
 interface CreateComponentOwnProps {}
 
 type CreateComponentProps = RouteComponentProps<CreateComponentRouterProps> &
   CreateComponentOwnProps;
 
-const Create = (props: CreateComponentProps) => {
+const EditPoll = (props: CreateComponentProps) => {
   const mockPoll: Poll = {
     id: 'aldnføaehsrpoaw4borqnøo3url',
     pollPin: 123456,
@@ -37,8 +36,7 @@ const Create = (props: CreateComponentProps) => {
       <p>logged in information user: number of polls:</p>
       <div className="header-my-polls">
         <div className="header-my-polls">
-          <h1>My Polls</h1>
-          <Link to={RouteMap.create.new}>New Poll</Link>
+          <h1>Edit Poll number {props.match.params.pollId}</h1>
         </div>
         <div>
           {mockPolls.map(poll => (
@@ -52,4 +50,4 @@ const Create = (props: CreateComponentProps) => {
   );
 };
 
-export const CreateComponent = withRouter(Create);
+export const CreateComponent = withRouter(EditPoll);

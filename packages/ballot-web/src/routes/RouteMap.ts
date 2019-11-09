@@ -6,11 +6,11 @@ export const RouteMap = {
     login: '/login',
     register: '/register',
   },
-  poll: {
-    path: '/poll',
-  },
-  create: {
-    path: '/create',
-    new: '/create/:poll-id',
+  manage: {
+    path: '/manage-polls',
+    edit: {
+      path: '/edit/:pollId',
+      createPath: (pollId: string) => `/edit/${pollId}`,
+    },
   },
 };

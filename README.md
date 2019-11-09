@@ -16,7 +16,7 @@ After that, projects can be run from its respective directory.
 
 # Project ideas for the future
 
-- Create a boilerplate README
+- EditPoll a boilerplate README
 - aukcode home: freelancing site. \*.aukcode can be used to host other stuff
 - explanatory resources (for learning, showing off and teaching)
   - this
