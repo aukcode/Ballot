@@ -1,7 +1,7 @@
 import { verify } from './verifyToken';
 const router = require('express').Router();
-const User = require('../models/User');
-const BlacklistedToken = require('../models/BlacklistedToken');
+const User = require('../schemas/User');
+const BlacklistedToken = require('../schemas/BlacklistedToken');
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { validateNewUser, validateLoginCredentials } from '../Validation';

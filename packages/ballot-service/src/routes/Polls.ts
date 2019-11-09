@@ -11,4 +11,23 @@ router.get('/', verify, (req: Request, res: Response) => {
   });
 });
 
+router.get('/:id', (req: Request, res: Response) => {
+  const id = req.params.id;
+  res.status(200).send(`id: ${id}`);
+});
+
+router.post('/new', (req: Request, res: Response) => {
+  const poll = req.body.poll;
+  res.status(200).send(`poll: ${poll}`);
+});
+
+router.patch('/:id', (req: Request, res: Response) => {
+  const poll = req.body.poll;
+  res.status(200).send(`poll: ${poll}`);
+});
+
+router.delete('/:id', (req: Request, res: Response) => {
+  const poll = req.body.poll;
+  res.status(200).send(`poll: ${poll}`);
+});
 module.exports = router;
