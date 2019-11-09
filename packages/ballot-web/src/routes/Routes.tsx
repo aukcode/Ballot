@@ -2,10 +2,11 @@ import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { RouteMap } from './RouteMap';
 import { HomeComponent } from './home/Home';
-import { CreateComponent } from './manage-polls/EditPoll';
+import { EditPollComponent } from './manage-polls/EditPoll';
 import { LoginComponent } from './login/Login';
 import { RegisterComponent } from './login/Register';
 import { LoginGuard } from './login/LoginGuard';
+import { ManagePollsComponent } from './manage-polls/ManagePolls';
 
 export const Routes = () => {
   return (
@@ -28,8 +29,13 @@ export const Routes = () => {
         />
         <LoginGuard>
           <Route
+            path={RouteMap.manage.path}
+            component={ManagePollsComponent}
+            exact={true}
+          />
+          <Route
             path={RouteMap.manage.edit.path}
-            component={CreateComponent}
+            component={EditPollComponent}
             exact={true}
           />
         </LoginGuard>

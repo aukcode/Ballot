@@ -1,8 +1,8 @@
-import { Query } from './Query';
+import { Question } from './Question';
 
 export interface Poll {
   id: string;
   pollPin: number;
   title: string;
-  queries: Query[];
+  questions: Question[];
 }

@@ -31,10 +31,18 @@ const Home = (props: Props) => {
       return (
         <div className="flex items-center justify-between">
           <div>
-            <button className="font-bold p-2 text-white cursor-pointer bg-orange-500 hover:bg-orange-400 rounded">
+            <button
+              onClick={() =>
+                props.history.push(RouteMap.manage.edit.createPath('new'))
+              }
+              className="font-bold p-2 text-white cursor-pointer bg-orange-500 hover:bg-orange-400 rounded"
+            >
               New Poll
             </button>
-            <button className="font-bold p-2 ml-6 text-white cursor-pointer">
+            <button
+              onClick={() => props.history.push(RouteMap.manage.path)}
+              className="font-bold p-2 ml-6 text-white cursor-pointer"
+            >
               Manage Polls
             </button>
           </div>
