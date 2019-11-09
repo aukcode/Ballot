@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Poll } from '../../models/Poll';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { ChangeEvent } from 'react';
 import { QuestionCard } from './poll-card/QuestionCard';
 import { Question } from '../../models/Question';
@@ -9,33 +9,6 @@ import { Question } from '../../models/Question';
 enum ErrorMessage {
   NO_ERROR = 'NO_ERROR',
   QUESTION_NOT_FOUND = 'Question not found',
-}
-const mockPoll: Poll = {
-  id: 'aldnføaehsrpoaw4borqnøo3url',
-  pollPin: 123456,
-  title: 'Test Poll',
-  questions: [
-    {
-      id: 'aasdfasdfasdfasdfasdfasdfasd',
-      question: "Who's your daddy",
-      options: ['Me', 'Myself', 'I'],
-    },
-    {
-      id: 'adfasdfasfgadaasdfasdfasdfasdfasdf',
-      question: 'Hvem skal ta over som leder?',
-      options: ['Tore', 'Cato', 'Ray'],
-    },
-    {
-      id: 'asdfasdfasdfasdfasdfasdfgthrdyhjftyjftuj',
-      question: 'Hvem skal ta over som økonomiansvarlig?',
-      options: ['Kim', 'Andre', 'Blank', 'Kongen', 'Sonja', 'lolololol'],
-    },
-  ],
-};
-
-const mockQuestions: Question[] = [];
-for (let i = 0; i < mockPoll.questions.length; i++) {
-  mockQuestions.push(mockPoll.questions[i]);
 }
 
 interface CreateComponentRouterProps {
@@ -48,9 +21,9 @@ type CreateComponentProps = RouteComponentProps<CreateComponentRouterProps> &
   CreateComponentOwnProps;
 
 const EditPoll = (props: CreateComponentProps) => {
-  const [pollTitle, setPollTitle] = useState<string>('test');
+  const [pollTitle, setPollTitle] = useState<string>('');
   const [newQuestion, setNewQuestion] = useState<string>();
-  const [questions, setQuestions] = useState<Question[]>(mockQuestions);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [newOption, setNewOption] = useState<string>('');
   const [options, setOptions] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>(
@@ -58,6 +31,28 @@ const EditPoll = (props: CreateComponentProps) => {
   );
 
   const isCreatingNewPoll = props.match.params.pollId === 'new';
+
+  useEffect(() => {
+    const pollId = props.match.params.pollId;
+    if (!isCreatingNewPoll) {
+      try {
+        const fetchPoll = async () => {
+          const result = await fetch(
+            `http://localhost:8080/api/polls/${pollId}`,
+            {
+              method: 'GET',
+            }
+          );
+          result.json().then(res => {
+            return setQuestions(res.questions), setPollTitle(res.title);
+          });
+        };
+        fetchPoll();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, []);
 
   const handleOnPollSaveClicked = (e: FormEvent) => {
     e.preventDefault();
@@ -261,11 +256,7 @@ const EditPoll = (props: CreateComponentProps) => {
           {isCreatingNewPoll && (
             <h1 className="text-4xl">Create a new poll!</h1>
           )}
-          {!isCreatingNewPoll && (
-            <h1 className="text-4xl">
-              Edit Poll number {props.match.params.pollId}
-            </h1>
-          )}
+          {!isCreatingNewPoll && <h1 className="text-4xl">Update your poll</h1>}
           {questions.length > 0 && (
             <button
               onClick={handleOnPollSaveClicked}
@@ -285,6 +276,7 @@ const EditPoll = (props: CreateComponentProps) => {
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setPollTitle(e.target.value)
             }
+            placeholder="Poll title"
           />
         </div>
 

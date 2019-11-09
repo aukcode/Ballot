@@ -13,6 +13,10 @@ const pollSchema = new mongoose.Schema({
     max: 999999,
     min: 100000,
   },
+  active: {
+    type: Boolean,
+    required: true,
+  },
   title: {
     type: String,
     required: true,

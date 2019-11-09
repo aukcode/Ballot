@@ -5,14 +5,15 @@ const Poll = require('../schemas/Poll');
 import v4 = require('uuid/v4');
 
 router.get('/:id', async (req: Request, res: Response) => {
-  const poll = await Poll.findOne({ _id: req.params.id });
-  res.status(200).send(`poll: ${poll}`);
+  const poll = await Poll.findOne({ id: req.params.id });
+  res.status(200).send(poll);
 });
 
 router.post('/new', async (req: Request, res: Response) => {
   const newPoll = new Poll({
     id: v4(),
     pollPin: generate(6),
+    active: req.body.active,
     title: req.body.title,
     questions: req.body.questions,
   });

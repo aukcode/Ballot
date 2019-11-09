@@ -14,6 +14,7 @@ const ManagePolls = (props: CreateComponentProps) => {
   const mockPoll: Poll = {
     id: 'aldnføaehsrpoaw4borqnøo3url',
     pollPin: 123456,
+    active: false,
     title: 'Test Poll',
     questions: [
       {
