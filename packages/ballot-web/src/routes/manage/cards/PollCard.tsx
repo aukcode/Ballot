@@ -3,19 +3,11 @@ import { Poll } from '../../../models/Poll';
 
 interface PollCardProps {
   poll: Poll;
-  updateQuestion: (questionId: string) => void;
-  removeQuestion: (questionId: string) => void;
+  updatePoll?: (pollId: string) => void;
+  removePoll?: (pollId: string) => void;
 }
 
-export const QuestionCard = (props: PollCardProps) => {
-  // const updateQuestion = () => {
-  //   props.updateQuestion(props.question.id);
-  // };
-  //
-  // const removeQuestion = () => {
-  //   props.removeQuestion(props.question.id);
-  // };
-
+export const PollCard = (props: PollCardProps) => {
   return (
     <div className="mt-8 p-4 shadow rounded-lg" key={props.poll.id}>
       <div className="flex justify-between">
@@ -29,7 +21,6 @@ export const QuestionCard = (props: PollCardProps) => {
           </a>
         </div>
       </div>
-      <div className="flex flex-wrap">{props.poll}</div>
     </div>
   );
 };

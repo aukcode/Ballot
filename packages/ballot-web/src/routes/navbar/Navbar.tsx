@@ -2,15 +2,15 @@ import * as React from 'react';
 import { RouteMap } from '../RouteMap';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useAuth } from '../../api/auth/AuthContext';
-// const { isSignedIn, signOut, user } = useAuth();
 
 interface NavbarProps {}
 
 type Props = RouteComponentProps<{}> & NavbarProps;
 
 const NavbarComponent = (props: Props) => {
+  const { isSignedIn, signOut, user } = useAuth();
   const renderNameOrSigninButtons = () => {
-    if (true) {
+    if (isSignedIn) {
       return (
         <div className="flex items-center justify-between">
           <div>
@@ -39,12 +39,12 @@ const NavbarComponent = (props: Props) => {
             <div>
               <p className="font-light text-gray-900 text-sm">Logged in as:</p>
               <p className="font-bold text-white">
-                {/*{user ? user.name : 'incognito'}*/}
+                {user ? user.name : 'incognito'}
               </p>
             </div>
             <button
               className="p-2 ml-6 cursor-pointer text-white bg-gray-800 hover:bg-gray-700 rounded"
-              // onClick={signOut}
+              onClick={signOut}
             >
               Log out
             </button>
@@ -53,19 +53,27 @@ const NavbarComponent = (props: Props) => {
       );
     } else {
       return (
-        <div className="flex justify-end">
-          <p
-            className="font-medium p-2 cursor-pointer text-white"
-            onClick={() => props.history.push(RouteMap.user.login)}
+        <div className="flex justify-between">
+          <button
+            onClick={() => props.history.push(RouteMap.home.path)}
+            className="font-bold p-2 ml-6 text-white hover:text-gray-300 cursor-pointer"
           >
-            Log in
-          </p>
-          <p
-            className="font-bold p-2 ml-4 text-white bg-orange-500 hover:bg-orange-400 rounded cursor-pointer"
-            onClick={() => props.history.push(RouteMap.user.register)}
-          >
-            Sign up
-          </p>
+            Home
+          </button>
+          <div className="flex">
+            <p
+              className="font-medium p-2 cursor-pointer text-white"
+              onClick={() => props.history.push(RouteMap.user.login)}
+            >
+              Log in
+            </p>
+            <p
+              className="font-bold p-2 ml-4 text-white bg-orange-500 hover:bg-orange-400 rounded cursor-pointer"
+              onClick={() => props.history.push(RouteMap.user.register)}
+            >
+              Sign up
+            </p>
+          </div>
         </div>
       );
     }

@@ -9,11 +9,18 @@ router.get('/:id', async (req: Request, res: Response) => {
   res.status(200).send(poll);
 });
 
+router.get('/user/:userId', async (req: Request, res: Response) => {
+  const userPolls = await Poll.find({ userId: req.params.userId });
+  res.status(200).send(userPolls);
+});
+
 router.post('/new', async (req: Request, res: Response) => {
   const newPoll = new Poll({
     id: v4(),
+    userId: req.body.userId,
     pollPin: generate(6),
     active: req.body.active,
+    archived: false,
     title: req.body.title,
     questions: req.body.questions,
   });

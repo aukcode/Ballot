@@ -7,6 +7,12 @@ const pollSchema = new mongoose.Schema({
     min: 6,
     max: 255,
   },
+  userId: {
+    type: String,
+    required: true,
+    max: 255,
+    min: 8,
+  },
   pollPin: {
     type: Number,
     required: true,
@@ -14,6 +20,10 @@ const pollSchema = new mongoose.Schema({
     min: 100000,
   },
   active: {
+    type: Boolean,
+    required: true,
+  },
+  archived: {
     type: Boolean,
     required: true,
   },

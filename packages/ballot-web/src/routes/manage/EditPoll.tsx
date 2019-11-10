@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { Poll } from '../../models/Poll';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { FormEvent, useEffect, useState } from 'react';
 import { ChangeEvent } from 'react';
 import { QuestionCard } from './cards/QuestionCard';
 import { Question } from '../../models/Question';
 import { RouteMap } from '../RouteMap';
+import { useAuth } from '../../api/auth/AuthContext';
 
 enum ErrorMessage {
-  NO_ERROR = '',
   QUESTION_NOT_FOUND = 'Question not found',
+  USER_NOT_FOUND = 'User not found. Are you sure you are logged in?',
   SERVER_ERROR = 'There was an error connecting to the server',
 }
 
@@ -23,6 +23,7 @@ type CreateComponentProps = RouteComponentProps<CreateComponentRouterProps> &
   CreateComponentOwnProps;
 
 const EditPoll = (props: CreateComponentProps) => {
+  const { user } = useAuth();
   const [pollTitle, setPollTitle] = useState<string>('');
   const [newQuestion, setNewQuestion] = useState<string>();
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -72,26 +73,33 @@ const EditPoll = (props: CreateComponentProps) => {
 
   const postNewPoll = async () => {
     try {
-      const result = await fetch('http://localhost:8080/api/polls/new', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          active: false,
-          title: pollTitle,
-          questions,
-        }),
-      }).catch(err => console.log(err));
-      if (result) {
+      if (user) {
+        const result = await fetch('http://localhost:8080/api/polls/new', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            active: false,
+            userId: user.id,
+            title: pollTitle,
+            questions,
+          }),
+        }).catch(err => console.log(err));
+        if (result) {
+          setIsLoading(false);
+        }
+        props.history.push(RouteMap.manage.path);
+      } else {
+        setErrorMessage(`${ErrorMessage.USER_NOT_FOUND}`);
         setIsLoading(false);
       }
-      props.history.push(RouteMap.manage.path);
     } catch (err) {
       setErrorMessage(`${ErrorMessage.SERVER_ERROR}: ${err}`);
     }
   };
 
+  // TODO: must be updated with stuff from postNewPoll()
   const patchPoll = async () => {
     const pollId = props.match.params.pollId;
     try {
