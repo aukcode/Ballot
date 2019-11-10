@@ -14,7 +14,6 @@ router.get('/', verify, async (req: Request, res: Response) => {
 });
 
 router.get('/:id', async (req: Request, res: Response) => {
-  console.log('finding user');
   const user = await User.findOne({ _id: req.params.id });
   res.status(200).send(user);
 });
