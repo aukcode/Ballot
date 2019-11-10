@@ -35,21 +35,20 @@ const ManagePolls = (props: Props) => {
           );
           result
             .json()
-            .then(res => {
-              return setPolls(res);
-            })
+            .then(res => setPolls(res))
             .catch(err =>
               setErrorMessage(`${ErrorMessage.SERVER_ERROR}: ${err}`)
             );
         };
         fetchPolls();
+        setErrorMessage('');
       } catch (err) {
         setErrorMessage(`${ErrorMessage.SERVER_ERROR}: ${err}`);
       }
     } else {
       setErrorMessage(`${ErrorMessage.USER_NOT_FOUND}`);
     }
-  }, []);
+  }, [user]);
 
   const renderPolls = () => {
     if (polls.length > 0) {

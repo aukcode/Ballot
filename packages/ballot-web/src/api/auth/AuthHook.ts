@@ -33,7 +33,6 @@ export const CreateAuthHook = (): AuthContextValues => {
   useEffect(() => {
     if (isUserAuthenticated) {
       const userId = getUserIdFromLocalStorage();
-      console.log(userId);
       try {
         const fetchUser = async () => {
           const result = await fetch(
@@ -42,7 +41,7 @@ export const CreateAuthHook = (): AuthContextValues => {
               method: 'GET',
             }
           );
-          result.json().then(res => setUser(res));
+          result.json().then(res => setUser({ ...res, id: res._id }));
         };
         fetchUser();
       } catch (err) {
@@ -50,7 +49,7 @@ export const CreateAuthHook = (): AuthContextValues => {
         console.log(err);
       }
     }
-  }, []);
+  }, [isSignedIn]);
 
   // The following is also used on survey hook (work). Don't know why
   // httpClient.registerOnTokenRefreshFailedCallback(signOut);
