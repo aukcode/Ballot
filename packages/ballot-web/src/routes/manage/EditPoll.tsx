@@ -5,10 +5,12 @@ import { FormEvent, useEffect, useState } from 'react';
 import { ChangeEvent } from 'react';
 import { QuestionCard } from './cards/QuestionCard';
 import { Question } from '../../models/Question';
+import { RouteMap } from '../RouteMap';
 
 enum ErrorMessage {
-  NO_ERROR = 'NO_ERROR',
+  NO_ERROR = '',
   QUESTION_NOT_FOUND = 'Question not found',
+  SERVER_ERROR = 'There was an error connecting to the server',
 }
 
 interface CreateComponentRouterProps {
@@ -26,9 +28,8 @@ const EditPoll = (props: CreateComponentProps) => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [newOption, setNewOption] = useState<string>('');
   const [options, setOptions] = useState<string[]>([]);
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(
-    ErrorMessage.NO_ERROR
-  );
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const isCreatingNewPoll = props.match.params.pollId === 'new';
 
@@ -43,20 +44,26 @@ const EditPoll = (props: CreateComponentProps) => {
               method: 'GET',
             }
           );
-          result.json().then(res => {
-            return setQuestions(res.questions), setPollTitle(res.title);
-          });
+          result
+            .json()
+            .then(res => {
+              return setQuestions(res.questions), setPollTitle(res.title);
+            })
+            .catch(err =>
+              setErrorMessage(`${ErrorMessage.QUESTION_NOT_FOUND}: ${err}`)
+            );
         };
         fetchPoll();
       } catch (err) {
-        console.log(err);
+        setErrorMessage(`${ErrorMessage.SERVER_ERROR}: ${err}`);
       }
     }
   }, []);
 
   const handleOnPollSaveClicked = (e: FormEvent) => {
     e.preventDefault();
-    if (props.match.params.pollId === 'new') {
+    setIsLoading(true);
+    if (isCreatingNewPoll) {
       postNewPoll();
     } else {
       patchPoll();
@@ -76,9 +83,12 @@ const EditPoll = (props: CreateComponentProps) => {
           questions,
         }),
       }).catch(err => console.log(err));
+      if (result) {
+        setIsLoading(false);
+      }
+      props.history.push(RouteMap.manage.path);
     } catch (err) {
-      console.log('ohoi there was an error with the server');
-      console.log(err);
+      setErrorMessage(`${ErrorMessage.SERVER_ERROR}: ${err}`);
     }
   };
 
@@ -96,25 +106,17 @@ const EditPoll = (props: CreateComponentProps) => {
           questions,
         }),
       }).catch(err => console.log(err));
+      if (result) {
+        setIsLoading(false);
+      }
+      props.history.push(RouteMap.manage.path);
     } catch (err) {
-      console.log('ohoi there was an error with the server');
-      console.log(err);
+      setErrorMessage(`${ErrorMessage.SERVER_ERROR}: ${err}`);
     }
   };
 
   const handleOnQuestionSubmitted = async (e: FormEvent) => {
     e.preventDefault();
-    const result = await fetch('', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        title: newQuestion,
-        questions,
-      }),
-    }).catch(err => console.log(err));
-
     if (newQuestion && newQuestion.length > 0) {
       setQuestions([
         ...questions,
@@ -171,7 +173,6 @@ const EditPoll = (props: CreateComponentProps) => {
   };
 
   const renderCreateQuestionForm = () => {
-    // label with input.
     return (
       <form
         onSubmit={handleOnQuestionSubmitted}
@@ -258,16 +259,19 @@ const EditPoll = (props: CreateComponentProps) => {
             <h1 className="text-4xl">Create a new poll!</h1>
           )}
           {!isCreatingNewPoll && <h1 className="text-4xl">Update your poll</h1>}
+
           {questions.length > 0 && (
             <button
               onClick={handleOnPollSaveClicked}
               className="py-2 px-8 w-auto bg-green-500 hover:bg-green-600 font-bold text-white rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              Save Poll
+              {isLoading ? 'Loading...' : 'Save Poll'}
             </button>
           )}
         </div>
+
+        <p className="text-red-500 font-bold">{errorMessage}</p>
 
         <div>
           <input
