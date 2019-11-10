@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Poll } from '../../models/Poll';
-import { QuestionCard } from './poll-card/QuestionCard';
+import { QuestionCard } from './cards/QuestionCard';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 interface CreateComponentRouterProps {}

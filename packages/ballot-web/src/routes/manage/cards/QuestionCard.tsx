@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Question } from '../../../models/Question';
 
-interface PollCardProps {
+interface QuestionCardProps {
   question: Question;
   updateQuestion: (questionId: string) => void;
   removeQuestion: (questionId: string) => void;
 }
 
-export const QuestionCard = (props: PollCardProps) => {
+export const QuestionCard = (props: QuestionCardProps) => {
   const updateQuestion = () => {
     props.updateQuestion(props.question.id);
   };

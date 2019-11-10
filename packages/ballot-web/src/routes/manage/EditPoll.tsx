@@ -3,7 +3,7 @@ import { Poll } from '../../models/Poll';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { FormEvent, useEffect, useState } from 'react';
 import { ChangeEvent } from 'react';
-import { QuestionCard } from './poll-card/QuestionCard';
+import { QuestionCard } from './cards/QuestionCard';
 import { Question } from '../../models/Question';
 
 enum ErrorMessage {
@@ -71,6 +71,7 @@ const EditPoll = (props: CreateComponentProps) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          active: false,
           title: pollTitle,
           questions,
         }),
