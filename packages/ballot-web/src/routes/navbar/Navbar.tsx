@@ -23,8 +23,14 @@ const NavbarComponent = (props: Props) => {
               New Poll
             </button>
             <button
+              onClick={() => props.history.push(RouteMap.home.path)}
+              className="font-bold p-2 ml-6 text-white hover:text-gray-300 cursor-pointer"
+            >
+              Home
+            </button>
+            <button
               onClick={() => props.history.push(RouteMap.manage.path)}
-              className="font-bold p-2 ml-6 text-white cursor-pointer"
+              className="font-bold p-2 ml-6 text-white hover:text-gray-300 cursor-pointer"
             >
               Manage Polls
             </button>
