@@ -13,6 +13,12 @@ router.get('/', verify, async (req: Request, res: Response) => {
   res.status(200).send(users);
 });
 
+router.get('/:id', async (req: Request, res: Response) => {
+  console.log('finding user');
+  const user = await User.findOne({ _id: req.params.id });
+  res.status(200).send(user);
+});
+
 router.post('/register', async (req: Request, res: Response) => {
   // LETS VALIDATE BEFORE WE MAKE A USER
   const { error } = validateNewUser(req.body);
