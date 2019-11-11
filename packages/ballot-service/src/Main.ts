@@ -13,7 +13,7 @@ const configureAccessControl = (
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.header('Access-Control-Expose-Headers', 'authorization');
-  // res.header('Access-Control-Expose-Methods', 'GET,POST,PATCH,DELETE');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
   next();
 };
 
