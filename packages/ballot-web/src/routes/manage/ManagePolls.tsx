@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Poll } from '../../models/Poll';
 import { useAuth } from '../../api/auth/AuthContext';
 import { PollCard } from './cards/PollCard';
+import { RouteMap } from '../RouteMap';
 
 enum ErrorMessage {
   USER_NOT_FOUND = 'User not found. Are you sure you are logged in?',
@@ -57,7 +58,11 @@ const ManagePolls = (props: Props) => {
           {polls
             .filter(poll => !poll.archived)
             .map(poll => {
-              return <PollCard poll={poll} />;
+              return (
+                <div key={poll.id}>
+                  <PollCard poll={poll} updatePoll={updatePoll} />
+                </div>
+              );
             })}
         </div>
       );
@@ -79,11 +84,19 @@ const ManagePolls = (props: Props) => {
           {polls
             .filter(poll => poll.archived)
             .map(poll => {
-              return <PollCard poll={poll} />;
+              return (
+                <div key={poll.id}>
+                  <PollCard poll={poll} updatePoll={updatePoll} />
+                </div>
+              );
             })}
         </div>
       );
     }
+  };
+
+  const updatePoll = (pollId: string) => {
+    props.history.push(RouteMap.manage.edit.createPath(pollId));
   };
 
   return (

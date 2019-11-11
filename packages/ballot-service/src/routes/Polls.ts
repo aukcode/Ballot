@@ -33,9 +33,15 @@ router.post('/new', async (req: Request, res: Response) => {
   }
 });
 
-router.patch('/:id', (req: Request, res: Response) => {
-  const poll = req.body.poll;
-  res.status(200).send(`poll: ${poll}`);
+router.patch('/:id', async (req: Request, res: Response) => {
+  const filter = { id: req.params.id };
+  const update = { title: req.body.title, questions: req.body.questions };
+
+  // having the findOneAndUpdate return straight to const
+  // made the change lag with one turn
+  await Poll.findOneAndUpdate(filter, update);
+  const poll = await Poll.findOne(filter);
+  res.status(200).send(poll);
 });
 
 router.delete('/:id', (req: Request, res: Response) => {

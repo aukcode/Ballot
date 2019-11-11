@@ -6,6 +6,7 @@ import { QuestionCard } from './cards/QuestionCard';
 import { Question } from '../../models/Question';
 import { RouteMap } from '../RouteMap';
 import { useAuth } from '../../api/auth/AuthContext';
+const uuidv4 = require('uuid/v4');
 
 enum ErrorMessage {
   QUESTION_NOT_FOUND = 'Question not found',
@@ -99,8 +100,8 @@ const EditPoll = (props: CreateComponentProps) => {
     }
   };
 
-  // TODO: must be updated with stuff from postNewPoll()
   const patchPoll = async () => {
+    console.log('patching poll');
     const pollId = props.match.params.pollId;
     try {
       const result = await fetch(`http://localhost:8080/api/polls/${pollId}`, {
@@ -109,17 +110,17 @@ const EditPoll = (props: CreateComponentProps) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id: pollId,
-          title: newQuestion,
+          title: pollTitle,
           questions,
         }),
       }).catch(err => console.log(err));
       if (result) {
         setIsLoading(false);
       }
-      props.history.push(RouteMap.manage.path);
+      // props.history.push(RouteMap.manage.path);
     } catch (err) {
       setErrorMessage(`${ErrorMessage.SERVER_ERROR}: ${err}`);
+      setIsLoading(false);
     }
   };
 
@@ -128,7 +129,7 @@ const EditPoll = (props: CreateComponentProps) => {
     if (newQuestion && newQuestion.length > 0) {
       setQuestions([
         ...questions,
-        { question: newQuestion, options, id: 'asdfasdfasdf' },
+        { question: newQuestion, options, id: uuidv4() },
       ]);
       setNewQuestion('');
       setOptions([]);
