@@ -62,7 +62,7 @@ const Register = (props: Props) => {
       return (
         <div className="h-40 flex justify-center items-center text-center">
           <div>
-            <p className="font-bold">Welcome to us {name}!</p>
+            <p className="font-bold">Welcome to Ballot, {name}!</p>
             <button
               onClick={() => navigateToLogin()}
               className="font-bold w-full p-2 mt-4 text-white cursor-pointer bg-blue-500 hover:bg-blue-700 rounded"

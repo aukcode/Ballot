@@ -117,7 +117,7 @@ const EditPoll = (props: CreateComponentProps) => {
       if (result) {
         setIsLoading(false);
       }
-      // props.history.push(RouteMap.manage.path);
+      props.history.push(RouteMap.manage.path);
     } catch (err) {
       setErrorMessage(`${ErrorMessage.SERVER_ERROR}: ${err}`);
       setIsLoading(false);
