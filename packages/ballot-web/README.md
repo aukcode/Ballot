@@ -68,7 +68,7 @@ Users can log in or just provide a pseudonym to join a session
 
 **Week 2:** ~~Implement session management with JWT~~. ~~Design the general page layout.~~
 
-**Week 3:** Implement the create page with poll management
+**Week 3:** ~~Implement the create page with poll management~~
 
 **Week 4:** Implement joining and voting/answering. Setup testing. TSLint.
 
