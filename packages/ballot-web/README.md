@@ -34,6 +34,7 @@ To run the app locally, run:
 
 - Sentry (use Capra consulting sentry app?) They also had something for docker
   - [sentry-utils-js](https://github.com/capraconsulting/sentry-utils-js)
+- HTTP calls with Axios
 
 ## Pages
 
