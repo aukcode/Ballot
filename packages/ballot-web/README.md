@@ -64,15 +64,15 @@ Users can log in or just provide a pseudonym to join a session
 
 ## Estimation
 
-**Week 1:** ~~Set up the monorepo~~, ~~commitizen~~+scope(+icons?), ~~lerna~~, ~~react router,~~ ~~prettier~~, ~~pretty-quick~~, ~~husky~~, ~~deployment~~, ~~CI~~, ~~mongo~~, ~~mongoose~~, ~~add~~ ~~petterive~~
+**Week 1:** ~~Set up the monorepo~~, ~~commitizen~~ ~~(+icons?)~, ~~lerna~~, ~~react router,~~ ~~prettier~~, ~~pretty-quick~~, ~~husky~~, ~~deployment~~, ~~CI~~, ~~mongo~~, ~~mongoose~~, ~~add~~ ~~petterive~~
 
 **Week 2:** ~~Implement session management with JWT~~. ~~Design the general page layout.~~
 
 **Week 3:** ~~Implement the create page with poll management~~
+~
+**Week 4:** Implement joining and voting/answering. Setup testing. ~~TSLint~.
 
-**Week 4:** Implement joining and voting/answering. Setup testing. TSLint.
-
-**Week 5:** EditPoll a component library in the monorepo. Make Button, Card and essential components
+**Week 5:** Create a component library in the monorepo. Make Button, Card and essential components
 
 **Week 6:** ~~README.md~~, testing and deployment
 
