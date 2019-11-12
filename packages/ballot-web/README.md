@@ -64,7 +64,7 @@ Users can log in or just provide a pseudonym to join a session
 
 ## Estimation
 
-**Week 1:** ~~Set up the monorepo~~, ~~commitizen~~ ~~(+icons?)~, ~~lerna~~, ~~react router,~~ ~~prettier~~, ~~pretty-quick~~, ~~husky~~, ~~deployment~~, ~~CI~~, ~~mongo~~, ~~mongoose~~, ~~add~~ ~~petterive~~
+**Week 1:** ~~Set up the monorepo~~, ~~commitizen~~ ~~(+icons?)~~, ~~lerna~~, ~~react router,~~ ~~prettier~~, ~~pretty-quick~~, ~~husky~~, ~~deployment~~, ~~CI~~, ~~mongo~~, ~~mongoose~~, ~~add~~ ~~petterive~~
 
 **Week 2:** ~~Implement session management with JWT~~. ~~Design the general page layout.~~
 
