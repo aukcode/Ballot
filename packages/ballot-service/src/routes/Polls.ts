@@ -1,3 +1,5 @@
+import { log } from 'util';
+
 const router = require('express').Router();
 import { verify } from '../auth/verifyToken';
 import { Request, Response } from 'express';
@@ -44,9 +46,12 @@ router.patch('/:id', async (req: Request, res: Response) => {
   res.status(200).send(poll);
 });
 
-router.delete('/:id', (req: Request, res: Response) => {
-  const poll = req.body.poll;
-  res.status(200).send(`poll: ${poll}`);
+router.delete('/:id', async (req: Request, res: Response) => {
+  const pollId = req.params.id;
+  const poll = await Poll.findOneAndDelete({ id: pollId }, function(err) {
+    err ? console.log(err) : console.log('successful deletion');
+  });
+  res.status(200).send(`Successfully deleted poll with id: ${pollId}`);
 });
 
 function generate(n) {
