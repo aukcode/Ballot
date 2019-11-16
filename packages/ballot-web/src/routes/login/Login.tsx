@@ -40,7 +40,7 @@ const Login = (props: Props) => {
       });
 
       if (result.status === 200) {
-        props.history.push(RouteMap.home.path);
+        props.history.push(RouteMap.manage.path);
       } else {
         setError(Error.LOGIN_ERROR);
       }

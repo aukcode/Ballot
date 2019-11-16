@@ -263,21 +263,30 @@ const EditPoll = (props: CreateComponentProps) => {
   return (
     <div className="flex justify-center mt-8">
       <div className="mx-3 w-full sm:max-w-3xl p-4">
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           {isCreatingNewPoll && (
             <h1 className="text-4xl">Create a new poll!</h1>
           )}
           {!isCreatingNewPoll && <h1 className="text-4xl">Update your poll</h1>}
 
-          {questions.length > 0 && (
+          <div>
             <button
-              onClick={handleOnPollSaveClicked}
-              className="py-2 px-8 w-auto bg-green-500 hover:bg-green-600 font-bold text-white rounded focus:outline-none focus:shadow-outline"
+              onClick={() => props.history.goBack()}
+              className="py-2 px-8 w-auto bg-gray-200 hover:bg-gray-400 font-bold text-gray-700 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              {isLoading ? 'Loading...' : 'Save Poll'}
+              Cancel
             </button>
-          )}
+            {questions.length > 0 && (
+              <button
+                onClick={handleOnPollSaveClicked}
+                className="py-2 px-8 w-auto ml-4 bg-green-500 hover:bg-green-600 font-bold text-white rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                {isLoading ? 'Loading...' : 'Save Poll'}
+              </button>
+            )}
+          </div>
         </div>
 
         <p className="text-red-500 font-bold">{errorMessage}</p>

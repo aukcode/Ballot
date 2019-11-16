@@ -82,23 +82,26 @@ const ManagePolls = (props: Props) => {
   };
 
   const renderArchivedPolls = () => {
-    return (
-      <div>
-        <h1 className="text-4xl border-b-2">Archived Polls</h1>
-        {archivedPolls.map(poll => {
-          return (
-            <PollCard
-              key={poll.id}
-              poll={poll}
-              archived={true}
-              archivePoll={archivePoll}
-              updatePoll={updatePoll}
-              deletePoll={deletePoll}
-            />
-          );
-        })}
-      </div>
-    );
+    const userHasArchivedPolls = archivedPolls.length > 0;
+    if (userHasArchivedPolls) {
+      return (
+        <div>
+          <h1 className="text-4xl border-b-2">Archived Polls</h1>
+          {archivedPolls.map(poll => {
+            return (
+              <PollCard
+                key={poll.id}
+                poll={poll}
+                archived={true}
+                archivePoll={archivePoll}
+                updatePoll={updatePoll}
+                deletePoll={deletePoll}
+              />
+            );
+          })}
+        </div>
+      );
+    }
   };
 
   const archivePoll = async (pollId: string) => {
