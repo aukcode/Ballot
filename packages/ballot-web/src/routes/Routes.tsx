@@ -29,18 +29,18 @@ export const Routes = () => {
             component={LoginComponent}
             exact={true}
           />
-          {/*<LoginGuard>*/}
-          <Route
-            path={RouteMap.manage.path}
-            component={ManagePollsComponent}
-            exact={true}
-          />
-          <Route
-            path={RouteMap.manage.edit.path}
-            component={EditPollComponent}
-            exact={true}
-          />
-          {/*</LoginGuard>*/}
+          <LoginGuard>
+            <Route
+              path={RouteMap.manage.path}
+              component={ManagePollsComponent}
+              exact={true}
+            />
+            <Route
+              path={RouteMap.manage.edit.path}
+              component={EditPollComponent}
+              exact={true}
+            />
+          </LoginGuard>
         </Switch>
       </NavbarContainer>
     </BrowserRouter>

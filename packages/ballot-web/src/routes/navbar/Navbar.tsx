@@ -10,7 +10,7 @@ type Props = RouteComponentProps<{}> & NavbarProps;
 const NavbarComponent = (props: Props) => {
   const { isSignedIn, signOut, user } = useAuth();
   const renderNameOrSigninButtons = () => {
-    if (true) {
+    if (isSignedIn) {
       return (
         <div className="flex items-center justify-between">
           <div>
