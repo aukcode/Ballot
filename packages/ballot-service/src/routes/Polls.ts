@@ -35,6 +35,17 @@ router.post('/new', async (req: Request, res: Response) => {
   }
 });
 
+router.post('/archive/:id', async (req: Request, res: Response) => {
+  const filter = { id: req.params.id };
+  const update = { archived: true };
+
+  // having the findOneAndUpdate return straight to const
+  // made the change lag with one turn
+  await Poll.findOneAndUpdate(filter, update);
+  const poll = await Poll.findOne(filter);
+  res.status(200).send(poll);
+});
+
 router.patch('/:id', async (req: Request, res: Response) => {
   const filter = { id: req.params.id };
   const update = { title: req.body.title, questions: req.body.questions };

@@ -21,6 +21,7 @@ type Props = RouteComponentProps<ManagePollsComponentRouterProps> &
 const ManagePolls = (props: Props) => {
   const { user } = useAuth();
   const [polls, setPolls] = useState<Poll[]>([]);
+  const [archivedPolls, setArchivedPolls] = useState<Poll[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   useEffect(() => {
@@ -36,7 +37,10 @@ const ManagePolls = (props: Props) => {
           );
           result
             .json()
-            .then(res => setPolls(res))
+            .then(res => {
+              setPolls(res.filter((poll: Poll) => !poll.archived));
+              setArchivedPolls(res.filter((poll: Poll) => poll.archived));
+            })
             .catch(err =>
               setErrorMessage(`${ErrorMessage.SERVER_ERROR}: ${err}`)
             );
@@ -55,18 +59,17 @@ const ManagePolls = (props: Props) => {
     if (polls.length > 0) {
       return (
         <div>
-          {polls
-            .filter(poll => !poll.archived)
-            .map(poll => {
-              return (
-                <PollCard
-                  key={poll.id}
-                  poll={poll}
-                  updatePoll={updatePoll}
-                  deletePoll={deletePoll}
-                />
-              );
-            })}
+          {polls.map(poll => {
+            return (
+              <PollCard
+                key={poll.id}
+                poll={poll}
+                archivePoll={archivePoll}
+                updatePoll={updatePoll}
+                deletePoll={deletePoll}
+              />
+            );
+          })}
         </div>
       );
     } else {
@@ -79,25 +82,43 @@ const ManagePolls = (props: Props) => {
   };
 
   const renderArchivedPolls = () => {
-    const archivedPolls = polls.filter(poll => poll.archived);
-    if (archivedPolls.length > 0) {
-      return (
-        <div>
-          <h1 className="text-4xl border-b-2">Archived Polls</h1>
-          {polls
-            .filter(poll => poll.archived)
-            .map(poll => {
-              return (
-                <PollCard
-                  key={poll.id}
-                  poll={poll}
-                  updatePoll={updatePoll}
-                  deletePoll={deletePoll}
-                />
-              );
-            })}
-        </div>
-      );
+    return (
+      <div>
+        <h1 className="text-4xl border-b-2">Archived Polls</h1>
+        {archivedPolls.map(poll => {
+          return (
+            <PollCard
+              key={poll.id}
+              poll={poll}
+              archived={true}
+              archivePoll={archivePoll}
+              updatePoll={updatePoll}
+              deletePoll={deletePoll}
+            />
+          );
+        })}
+      </div>
+    );
+  };
+
+  const archivePoll = async (pollId: string) => {
+    try {
+      const result = await fetch(
+        `http://localhost:8080/api/polls/archive/${pollId}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      ).catch(err => console.log(err));
+      const archivedPoll = polls.find(poll => poll.id === pollId);
+      if (archivedPoll) {
+        setArchivedPolls([...archivedPolls, archivedPoll]);
+        setPolls(polls.filter(poll => poll.id !== pollId));
+      }
+    } catch (err) {
+      setErrorMessage(`${ErrorMessage.SERVER_ERROR}: ${err}`);
     }
   };
 
@@ -122,6 +143,7 @@ const ManagePolls = (props: Props) => {
     }
   };
 
+  console.log(polls);
   return (
     <div className="flex justify-center mt-8">
       <div className="mx-3 w-full sm:max-w-3xl p-4">
@@ -129,7 +151,7 @@ const ManagePolls = (props: Props) => {
         <p className="font-bold text-red-500 mt-2">{errorMessage}</p>
         <div className="my-4">{renderPolls()}</div>
 
-        <div className="my-4">{renderArchivedPolls()}</div>
+        <div className="mb-4 mt-16">{renderArchivedPolls()}</div>
       </div>
     </div>
   );

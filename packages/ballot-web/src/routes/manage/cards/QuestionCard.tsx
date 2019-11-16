@@ -28,7 +28,7 @@ export const QuestionCard = (props: QuestionCardProps) => {
 
   return (
     <div>
-      <div className="mt-8 p-4 shadow rounded-lg">
+      <div className={questionCardClassName}>
         <div className="flex justify-between">
           <h2 className="text-2xl text-gray-700">{props.question.question}</h2>
           <div className="flex">
