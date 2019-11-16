@@ -17,7 +17,7 @@ export const QuestionCard = (props: QuestionCardProps) => {
   };
 
   return (
-    <div className="mt-8 p-4 shadow rounded-lg" key={props.question.question}>
+    <div className="mt-8 p-4 shadow rounded-lg">
       <div className="flex justify-between">
         <h2 className="text-2xl text-gray-700">{props.question.question}</h2>
         <div className="flex">
@@ -37,7 +37,10 @@ export const QuestionCard = (props: QuestionCardProps) => {
       </div>
       <div className="flex flex-wrap">
         {props.question.options.map(option => (
-          <span className="inline-block bg-blue-200 rounded-full px-5 py-2 text-sm font-semibold m-2">
+          <span
+            key={option}
+            className="inline-block bg-blue-200 rounded-full px-5 py-2 text-sm font-semibold m-2"
+          >
             {option}
           </span>
         ))}
