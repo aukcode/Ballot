@@ -16,7 +16,7 @@ After that, projects can be run from its respective directory.
 
 # Project ideas for the future
 
-- Create a boilerplate README
+- EditPoll a boilerplate README
 - aukcode home: freelancing site. \*.aukcode can be used to host other stuff
 - explanatory resources (for learning, showing off and teaching)
   - this
@@ -38,6 +38,7 @@ After that, projects can be run from its respective directory.
 - Infoscreen II
 - Copy [OneApp](https://reader.one/)
 - A microapp that searches for react or other in trending on github, then emails me relevan stuff
+- subscribe to specific launches
 
 ### Every time you build a to-do list app, a puppy ? dies ?
 

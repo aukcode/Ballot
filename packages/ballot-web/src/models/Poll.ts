@@ -1,8 +1,10 @@
-import { Query } from './Query';
+import { Question } from './Question';
 
 export interface Poll {
   id: string;
   pollPin: number;
+  active: boolean;
+  archived: boolean;
   title: string;
-  queries: Query[];
+  questions: Question[];
 }

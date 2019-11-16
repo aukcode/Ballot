@@ -34,6 +34,7 @@ To run the app locally, run:
 
 - Sentry (use Capra consulting sentry app?) They also had something for docker
   - [sentry-utils-js](https://github.com/capraconsulting/sentry-utils-js)
+- HTTP calls with Axios
 
 ## Pages
 
@@ -64,13 +65,13 @@ Users can log in or just provide a pseudonym to join a session
 
 ## Estimation
 
-**Week 1:** ~~Set up the monorepo~~, ~~commitizen~~+scope(+icons?), ~~lerna~~, ~~react router,~~ ~~prettier~~, ~~pretty-quick~~, ~~husky~~, ~~deployment~~, ~~CI~~, ~~mongo~~, ~~mongoose~~, ~~add~~ ~~petterive~~
+**Week 1:** ~~Set up the monorepo~~, ~~commitizen~~ ~~(+icons?)~~, ~~lerna~~, ~~react router,~~ ~~prettier~~, ~~pretty-quick~~, ~~husky~~, ~~deployment~~, ~~CI~~, ~~mongo~~, ~~mongoose~~, ~~add~~ ~~petterive~~
 
 **Week 2:** ~~Implement session management with JWT~~. ~~Design the general page layout.~~
 
-**Week 3:** Implement the create page with poll management
+**Week 3:** ~~Implement the create page with poll management~~
 
-**Week 4:** Implement joining and voting/answering. Setup testing. TSLint.
+**Week 4:** Implement joining and voting/answering. Setup testing. ~~TSLint~~.
 
 **Week 5:** Create a component library in the monorepo. Make Button, Card and essential components
 

@@ -5,14 +5,19 @@ import dotenv from 'dotenv';
 const app = express();
 const port = 8080;
 
-const whiteListDomains = (req: Request, res: Response, next: NextFunction) => {
+const configureAccessControl = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.header('Access-Control-Expose-Headers', 'authorization');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
   next();
 };
 
-app.use(whiteListDomains);
+app.use(configureAccessControl);
 dotenv.config();
 
 // CONNECT DB

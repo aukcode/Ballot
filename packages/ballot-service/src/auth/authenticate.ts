@@ -1,7 +1,7 @@
 import { verify } from './verifyToken';
 const router = require('express').Router();
-const User = require('../models/User');
-const BlacklistedToken = require('../models/BlacklistedToken');
+const User = require('../schemas/User');
+const BlacklistedToken = require('../schemas/BlacklistedToken');
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { validateNewUser, validateLoginCredentials } from '../Validation';
@@ -11,6 +11,11 @@ import { Request, Response } from 'express';
 router.get('/', verify, async (req: Request, res: Response) => {
   const users = await User.find();
   res.status(200).send(users);
+});
+
+router.get('/:id', async (req: Request, res: Response) => {
+  const user = await User.findOne({ _id: req.params.id });
+  res.status(200).send(user);
 });
 
 router.post('/register', async (req: Request, res: Response) => {
@@ -41,8 +46,6 @@ router.post('/register', async (req: Request, res: Response) => {
 
 // LOGIN
 router.post('/login', async (req: Request, res: Response) => {
-  console.log(`email: ${req.body.email}`);
-  console.log(`password: ${req.body.password}`);
   // LETS VALIDATE BEFORE WE LOGIN A USER
   const { error } = validateLoginCredentials(req.body);
   if (error) return res.status(400).send(error.details[0].message);
