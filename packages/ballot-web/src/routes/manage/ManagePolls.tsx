@@ -59,9 +59,12 @@ const ManagePolls = (props: Props) => {
             .filter(poll => !poll.archived)
             .map(poll => {
               return (
-                <div key={poll.id}>
-                  <PollCard poll={poll} updatePoll={updatePoll} />
-                </div>
+                <PollCard
+                  key={poll.id}
+                  poll={poll}
+                  updatePoll={updatePoll}
+                  deletePoll={deletePoll}
+                />
               );
             })}
         </div>
@@ -85,9 +88,12 @@ const ManagePolls = (props: Props) => {
             .filter(poll => poll.archived)
             .map(poll => {
               return (
-                <div key={poll.id}>
-                  <PollCard poll={poll} updatePoll={updatePoll} />
-                </div>
+                <PollCard
+                  key={poll.id}
+                  poll={poll}
+                  updatePoll={updatePoll}
+                  deletePoll={deletePoll}
+                />
               );
             })}
         </div>
@@ -97,6 +103,10 @@ const ManagePolls = (props: Props) => {
 
   const updatePoll = (pollId: string) => {
     props.history.push(RouteMap.manage.edit.createPath(pollId));
+  };
+
+  const deletePoll = (pollId: string) => {
+    console.log(`delete poll with id ${pollId} clicked`);
   };
 
   return (

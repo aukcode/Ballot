@@ -172,6 +172,7 @@ const EditPoll = (props: CreateComponentProps) => {
       <div>
         {questions.map(question => (
           <QuestionCard
+            key={question.id}
             question={question}
             removeQuestion={removeQuestion}
             updateQuestion={updateQuestion}
