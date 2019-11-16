@@ -105,8 +105,21 @@ const ManagePolls = (props: Props) => {
     props.history.push(RouteMap.manage.edit.createPath(pollId));
   };
 
-  const deletePoll = (pollId: string) => {
-    console.log(`delete poll with id ${pollId} clicked`);
+  const deletePoll = async (pollId: string) => {
+    try {
+      const result = await fetch(`http://localhost:8080/api/polls/${pollId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).catch(err => console.log(err));
+      const filteredPolls = polls.filter(poll => {
+        return poll.id !== pollId;
+      });
+      setPolls(filteredPolls);
+    } catch (err) {
+      setErrorMessage(`${ErrorMessage.SERVER_ERROR}: ${err}`);
+    }
   };
 
   return (

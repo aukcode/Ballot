@@ -101,7 +101,6 @@ const EditPoll = (props: CreateComponentProps) => {
   };
 
   const patchPoll = async () => {
-    console.log('patching poll');
     const pollId = props.match.params.pollId;
     try {
       const result = await fetch(`http://localhost:8080/api/polls/${pollId}`, {
