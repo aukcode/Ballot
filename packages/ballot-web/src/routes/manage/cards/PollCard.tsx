@@ -10,15 +10,18 @@ interface PollCardProps {
 }
 
 export const PollCard = (props: PollCardProps) => {
+  const { poll } = props;
   const [shouldShowDeletionDialog, setShouldShowDeletionDialog] = useState<
     boolean
   >(false);
-  const updatePoll = () => {
-    props.updatePoll(props.poll.id);
+  const updatePoll = (event: React.MouseEvent<HTMLElement>) => {
+    if (event.target == event.currentTarget) {
+      props.updatePoll(poll.id);
+    }
   };
 
   const deletePoll = () => {
-    props.deletePoll(props.poll.id);
+    props.deletePoll(poll.id);
   };
 
   const cardClassName = classNames('mt-8 p-4 shadow rounded-t-lg', {
@@ -28,8 +31,11 @@ export const PollCard = (props: PollCardProps) => {
   return (
     <div>
       <div className={cardClassName}>
-        <div className="flex justify-between">
-          <h2 className="text-2xl text-gray-700">{props.poll.title}</h2>
+        <div
+          className="flex justify-between cursor-pointer"
+          onClick={updatePoll}
+        >
+          <h2 className="text-2xl text-gray-800">{poll.title}</h2>
           <div className="flex">
             <i
               onClick={updatePoll}
@@ -41,6 +47,7 @@ export const PollCard = (props: PollCardProps) => {
             />
           </div>
         </div>
+        <p className="text-gray-600">{poll.questions.length} questions</p>
       </div>
       {shouldShowDeletionDialog && (
         <div className="bg-red-500 rounded-b-lg px-4 py-2 flex justify-between">
