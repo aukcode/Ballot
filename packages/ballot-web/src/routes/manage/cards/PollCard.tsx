@@ -50,11 +50,17 @@ export const PollCard = (props: PollCardProps) => {
                 className="fas fa-pen fa-lg opacity-50 hover:opacity-75 cursor-pointer"
               />
               <i
-                onClick={() => setShouldShowArchiveDialog(true)}
+                onClick={() => {
+                  setShouldShowArchiveDialog(true);
+                  setShouldShowDeletionDialog(false);
+                }}
                 className="fas fa-archive ml-8 fa-lg opacity-50 hover:opacity-75 cursor-pointer"
               />
               <i
-                onClick={() => setShouldShowDeletionDialog(true)}
+                onClick={() => {
+                  setShouldShowDeletionDialog(true);
+                  setShouldShowArchiveDialog(false);
+                }}
                 className="fas fa-trash ml-8 fa-lg opacity-50 hover:opacity-75 cursor-pointer"
               />
             </div>

@@ -1,5 +1,3 @@
-import { log } from 'util';
-
 const router = require('express').Router();
 import { verify } from '../auth/verifyToken';
 import { Request, Response } from 'express';
