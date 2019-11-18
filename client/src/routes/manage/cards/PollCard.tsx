@@ -44,10 +44,12 @@ export const PollCard = (props: PollCardProps) => {
           {!archived && (
             <div className="flex">
               <i
+                title="Edit this poll"
                 onClick={updatePoll}
                 className="fas fa-pen fa-lg opacity-50 hover:opacity-75 cursor-pointer"
               />
               <i
+                title="Archive this poll"
                 onClick={() => {
                   setShouldShowArchiveDialog(true);
                   setShouldShowDeletionDialog(false);
@@ -55,6 +57,7 @@ export const PollCard = (props: PollCardProps) => {
                 className="fas fa-archive ml-8 fa-lg opacity-50 hover:opacity-75 cursor-pointer"
               />
               <i
+                title="Delete this poll"
                 onClick={() => {
                   setShouldShowDeletionDialog(true);
                   setShouldShowArchiveDialog(false);

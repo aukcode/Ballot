@@ -34,6 +34,7 @@ export const QuestionCard = (props: QuestionCardProps) => {
           <div className="flex">
             <a href="#new-question-form">
               <i
+                title="Edit this question"
                 onClick={updateQuestion}
                 className="fas fa-pen fa-lg opacity-50 hover:opacity-75 cursor-pointer"
               />
@@ -41,6 +42,7 @@ export const QuestionCard = (props: QuestionCardProps) => {
             {/*eslint-disable-next-line*/}
             <a>
               <i
+                title="Delete this question"
                 onClick={() => setShouldShowDeletionDialog(true)}
                 className="fas fa-trash ml-8 fa-lg opacity-50 hover:opacity-75 cursor-pointer"
               />
