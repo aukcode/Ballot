@@ -82,3 +82,7 @@ Users can log in or just provide a pseudonym to join a session
 **Week 6:** ~~README.md~~, testing and deployment
 
 **Week 7:** Finalising. Fixing.
+
+TODO: 
+1. convert repo
+2. find a way to purge/gitignore css
