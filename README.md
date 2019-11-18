@@ -1,52 +1,90 @@
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-
 ## What is this
+This is WIP - Work in progess and under construction. The idea is:
+ 
+This is an app that allows an organization to hold general elections. It's intended use is while holding general assemblies and elections within these. An emphasis have been put on anonymity. Names are associated with polls only, not individual answers.
 
-This is a monorepo for my current maintained projects.
+## What is it made with
 
-Go to the **packages** directory for individual projects.
+#### Front-end
+>./client
+- UI: TailwindCSS
+- Typescript
+- React & React Hooks
+- React Router
+
+#### Back-end
+>./server
+- NodeJS & Express
+- MongoDB
+- JWT and bcrypt library for security
+- Hapi/Joi for data validation
 
 ## Install and run
 
-A bootstrap script has been made that takes care off all setup:
+cd into both server and client. Then, Run:
 
-`$ npm run bootstrap`
+`$ npm install`
 
-After that, projects can be run from its respective directory.
+To run the app locally, run:
 
-# Project ideas for the future
+`$ npm start`
 
-- EditPoll a boilerplate README
-- aukcode home: freelancing site. \*.aukcode can be used to host other stuff
-- explanatory resources (for learning, showing off and teaching)
-  - this
-  - bind
-  - dependency injection
-  - git page ?? include the tips for logging etc and replace the onenote page
-- issue tracker board
-- Eurovision scoring board for parties
-- Forholdsapp. Liste med ting som kan gjøres og måter de kan gjøres på etc.
-  Random tidspunkt for når man får en random sammensetning: make it work!
-- a utility package in the monorepo
-- BankID
-- STRIPE
-- git alias autocomplete. Medium artikkel??
-- C++ for SpaceX roller
-- quote API supreme
-- GossipR - app som lar jentene skrive små gossiper som blir realed periodisk
-- Booking side for flytende badstu (for Martin and gang)
-- Infoscreen II
-- Copy [OneApp](https://reader.one/)
-- A microapp that searches for react or other in trending on github, then emails me relevan stuff
-- subscribe to specific launches
+In order to make the backend work, you must connect a database. The .env file with database secret is not included. 
+This file must contain the db connect line "DB_CONNECT={your stuff here}" and "TOKEN_SECRET={random stuff here}".
+Go to [cloud.mongodb.com](http://cloud.mongodb.com) to learn how to do this.
 
-### Every time you build a to-do list app, a puppy ? dies ?
+# Development Notes
 
-[Link](https://www.freecodecamp.org/news/every-time-you-build-a-to-do-list-app-a-puppy-dies-505b54637a5d/)
+## Further dev?
 
-#### Something with satalite data/api
+- Sentry (use Capra consulting sentry app?) They also had something for docker
+  - [sentry-utils-js](https://github.com/capraconsulting/sentry-utils-js)
+- HTTP calls with Axios
 
-- Sentinel satellite
-- Copernicus
-- Starlink
-- esabic.no
+## Pages
+
+Landing page
+
+Login page / modal
+
+Admin page for creating and managing elections/voting sessions
+
+Report modal
+
+Answer page for answering questions
+
+## Implementation
+
+Login and session management with JWT and joi validation ([Medium article](https://medium.com/@rossbulat/joi-for-node-exploring-javascript-object-schema-validation-50dd4b8e1b0f))
+
+A pin is made for each voting session. Users can join by providing this pin. Only when active.
+
+Users can log in or just provide a pseudonym to join a session
+
+## Security and GDPR concerns
+
+1. User passwords should be stored as salted hashes.
+2. Names should only be associated with polls, not answers
+3. OWASP Top 10 should be consulted
+4. There should be a mechanism for deleting old data
+
+## Estimation
+
+**Week 1:** ~~Set up the monorepo~~, ~~commitizen~~ ~~(+icons?)~~, ~~lerna~~, ~~react router,~~ ~~prettier~~, ~~pretty-quick~~, ~~husky~~, ~~deployment~~, ~~CI~~, ~~mongo~~, ~~mongoose~~, ~~add~~ ~~petterive~~
+
+**Week 2:** ~~Implement session management with JWT~~. ~~Design the general page layout.~~
+
+**Week 3:** ~~Implement the create page with poll management~~
+
+**Week 4:** Implement joining and voting/answering. Setup testing. ~~TSLint~~.
+
+**Week 5:** Create a component library in the monorepo. Make Button, Card and essential components
+
+**Week 6:** ~~README.md~~, testing and deployment
+
+**Week 7:** Finalising. Fixing.
+
+TODO: 
+1. convert repo
+2. find a way to purge/gitignore css
+3. testing

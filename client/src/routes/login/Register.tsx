@@ -25,7 +25,7 @@ const Register = (props: Props) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const result = await fetch('http://localhost:8080/api/users/register/', {
+    const result = await fetch('http://localhost:8080/api/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

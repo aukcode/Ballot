@@ -34,9 +34,9 @@ const EditPoll = (props: CreateComponentProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const isCreatingNewPoll = props.match.params.pollId === 'new';
+  const pollId = props.match.params.pollId;
 
   useEffect(() => {
-    const pollId = props.match.params.pollId;
     if (!isCreatingNewPoll) {
       try {
         const fetchPoll = async () => {
@@ -49,7 +49,8 @@ const EditPoll = (props: CreateComponentProps) => {
           result
             .json()
             .then(res => {
-              return setQuestions(res.questions), setPollTitle(res.title);
+              setQuestions(res.questions);
+              setPollTitle(res.title);
             })
             .catch(err =>
               setErrorMessage(`${ErrorMessage.QUESTION_NOT_FOUND}: ${err}`)
@@ -60,7 +61,7 @@ const EditPoll = (props: CreateComponentProps) => {
         setErrorMessage(`${ErrorMessage.SERVER_ERROR}: ${err}`);
       }
     }
-  }, []);
+  }, [isCreatingNewPoll, pollId]);
 
   const handleOnPollSaveClicked = (e: FormEvent) => {
     e.preventDefault();

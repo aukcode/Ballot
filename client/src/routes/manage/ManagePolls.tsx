@@ -106,15 +106,12 @@ const ManagePolls = (props: Props) => {
 
   const archivePoll = async (pollId: string) => {
     try {
-      const result = await fetch(
-        `http://localhost:8080/api/polls/archive/${pollId}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      ).catch(err => console.log(err));
+      await fetch(`http://localhost:8080/api/polls/archive/${pollId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).catch(err => console.log(err));
       const archivedPoll = polls.find(poll => poll.id === pollId);
       if (archivedPoll) {
         setArchivedPolls([...archivedPolls, archivedPoll]);
@@ -131,7 +128,7 @@ const ManagePolls = (props: Props) => {
 
   const deletePoll = async (pollId: string) => {
     try {
-      const result = await fetch(`http://localhost:8080/api/polls/${pollId}`, {
+      await fetch(`http://localhost:8080/api/polls/${pollId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -146,7 +143,6 @@ const ManagePolls = (props: Props) => {
     }
   };
 
-  console.log(polls);
   return (
     <div className="flex justify-center mt-8">
       <div className="mx-3 w-full sm:max-w-3xl p-4">

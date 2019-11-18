@@ -17,9 +17,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build:css": "tailwind build src/app.css -o src/tailwind-styles.css",
+    "build": "react-scripts build build:css",
+    "build:css": "postcss src/app.css -o src/tailwind.css",
     "test": "react-scripts test",
+    "test:ci": "npm install && react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "npm run build && sh deployment/deploy-prod.sh"
   },
@@ -39,6 +40,8 @@
     ]
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.9"
+    "@fullhuman/postcss-purgecss": "^1.3.0",
+    "@types/classnames": "^2.2.9",
+    "postcss-cli": "^6.1.3"
   }
 }
