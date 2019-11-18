@@ -18,7 +18,6 @@ const Home = (props: Props) => {
   return (
     <div className="h-screen">
       <div className="mt-48 mx-3 sm:mx-auto sm:max-w-sm">
-        <h1 className="text-green-200">hei</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4 mt-4">
             <label
