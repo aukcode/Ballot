@@ -17,7 +17,7 @@ After that, projects can be run from its respective directory.
 # Project ideas for the future
 
 - EditPoll a boilerplate README
-- aukcode home: freelancing site. \*.aukcode can be used to host other stuff
+- aukcode home: freelancing site. \*.aukcode can be used to host other stuff. Use and embed Medium for blogging/writing
 - explanatory resources (for learning, showing off and teaching)
   - this
   - bind
@@ -39,6 +39,7 @@ After that, projects can be run from its respective directory.
 - Copy [OneApp](https://reader.one/)
 - A microapp that searches for react or other in trending on github, then emails me relevan stuff
 - subscribe to specific launches
+- help update the propulse page?
 
 ### Every time you build a to-do list app, a puppy ? dies ?
 

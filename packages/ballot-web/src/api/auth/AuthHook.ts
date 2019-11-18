@@ -48,6 +48,8 @@ export const CreateAuthHook = (): AuthContextValues => {
         console.log('error refetching user in hook');
         console.log(err);
       }
+    } else {
+      signOut();
     }
   }, [isSignedIn]);
 

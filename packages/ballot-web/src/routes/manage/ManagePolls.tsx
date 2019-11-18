@@ -146,7 +146,6 @@ const ManagePolls = (props: Props) => {
     }
   };
 
-  console.log(polls);
   return (
     <div className="flex justify-center mt-8">
       <div className="mx-3 w-full sm:max-w-3xl p-4">
