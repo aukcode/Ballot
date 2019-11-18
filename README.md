@@ -87,3 +87,4 @@ Users can log in or just provide a pseudonym to join a session
 TODO: 
 1. convert repo
 2. find a way to purge/gitignore css
+3. testing
