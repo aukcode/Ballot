@@ -1,5 +1,6 @@
 ## What is this
-
+This is WIP - Work in progess and under construction. The idea is:
+ 
 This is an app that allows an organization to hold general elections. It's intended use is while holding general assemblies and elections within these. An emphasis have been put on anonymity. Names are associated with polls only, not individual answers.
 
 ## What is it made with
