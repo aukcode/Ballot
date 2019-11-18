@@ -38,6 +38,7 @@ export const QuestionCard = (props: QuestionCardProps) => {
                 className="fas fa-pen fa-lg opacity-50 hover:opacity-75 cursor-pointer"
               />
             </a>
+            {/*eslint-disable-next-line*/}
             <a>
               <i
                 onClick={() => setShouldShowDeletionDialog(true)}

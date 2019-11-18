@@ -25,9 +25,7 @@ export const PollCard = (props: PollCardProps) => {
   };
 
   const updatePoll = (event: React.MouseEvent<HTMLElement>) => {
-    if (event.target == event.currentTarget) {
-      props.updatePoll(poll.id);
-    }
+    props.updatePoll(poll.id);
   };
 
   const deletePoll = () => {
