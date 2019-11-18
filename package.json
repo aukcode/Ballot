@@ -10,7 +10,7 @@
     "serve": "NODE_ENV=local ts-node-dev server/Main.ts",
     "start": "npm run build && npm run serve",
     "test": "cd client && npm run test",
-    "test:ci": "npm install && npm run test:ci"
+    "test:ci": "npm install && npm run test"
   },
   "devDependencies": {
     "@types/express": "^4.17.0",
