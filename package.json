@@ -7,7 +7,7 @@
   "scripts": {
     "build": "npm run build-ts",
     "build-ts": "tsc",
-    "serve": "NODE_ENV=local ts-node-dev src/Main.ts",
+    "serve": "NODE_ENV=local ts-node-dev server/Main.ts",
     "start": "npm run build && npm run serve",
     "test": "npm run test:only",
     "test:ci": "npm run bootstrap && lerna run test:ci",
