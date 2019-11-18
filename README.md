@@ -20,7 +20,7 @@ This is an app that allows an organization to hold general elections. It's inten
 
 ## Install and run
 
-Make sure you are in the same folder as package.json. Run:
+cd into both server and client. Then, Run:
 
 `$ npm install`
 
