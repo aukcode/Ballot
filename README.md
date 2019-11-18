@@ -30,7 +30,7 @@ To run the app locally, run:
 
 In order to make the backend work, you must connect a database. The .env file with database secret is not included. 
 This file must contain the db connect line "DB_CONNECT=<your stuff here>" and "TOKEN_SECRET=<random stuff here>".
-Go to [cloud.mongodb.com](cloud.mongodb.com) to learn how to do this.
+Go to [cloud.mongodb.com](http://cloud.mongodb.com) to learn how to do this.
 
 # Development Notes
 
