@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build-ts",
     "build-ts": "tsc",
-    "serve": "NODE_ENV=local ts-node-dev src/Main.ts",
+    "serve": "NODE_ENV=local ts-node-dev ../../src/Main.ts",
     "start": "npm run build && npm run serve"
   },
   "devDependencies": {
