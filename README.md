@@ -1,18 +1,18 @@
 ## What is this
 
-This is an app that allows an organization to hold generall elections. It's intended use is while holding general assemblies and elections within these. An emphasis have been put on anonymity. Names are associated with polls only, not individual answers.
+This is an app that allows an organization to hold general elections. It's intended use is while holding general assemblies and elections within these. An emphasis have been put on anonymity. Names are associated with polls only, not individual answers.
 
 ## What is it made with
 
 #### Front-end
-
+>./client
 - UI: TailwindCSS
 - Typescript
 - React & React Hooks
 - React Router
 
 #### Back-end
-
+>./server
 - NodeJS & Express
 - MongoDB
 - JWT and bcrypt library for security
