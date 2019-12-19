@@ -19,24 +19,29 @@ This is an app that allows an organization to hold general elections. It's inten
 - JWT and bcrypt library for security
 - Hapi/Joi for data validation
 
-## Install and run
+## Install and run back-end
 
-cd into both server and client. Then, Run:
-
+In root
 `$ npm install`
 
 Make a .env file in the root of the project.
 Add two entries to this file:
 `DB_CONNECT = <your own mongodb atlas url link>`
 `TOKEN_SECRET = somegibberishcarractersandstuff`
+Go to [cloud.mongodb.com](http://cloud.mongodb.com) to learn how to make and connect a database.
 
 To run the app locally, run:
 
 `$ npm start`
 
-In order to make the backend work, you must connect a database. The .env file with database secret is not included. 
-This file must contain the db connect line "DB_CONNECT={your stuff here}" and "TOKEN_SECRET={random stuff here}".
-Go to [cloud.mongodb.com](http://cloud.mongodb.com) to learn how to do this.
+## Install and run front-end
+cd into client
+
+`$ npm install`
+
+`$ npm run build:css`
+
+`$ npm start`
 
 # Development Notes
 
