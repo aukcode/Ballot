@@ -25,6 +25,11 @@ cd into both server and client. Then, Run:
 
 `$ npm install`
 
+Make a .env file in the root of the project.
+Add two entries to this file:
+`DB_CONNECT = <your own mongodb atlas url link>`
+`TOKEN_SECRET = somegibberishcarractersandstuff`
+
 To run the app locally, run:
 
 `$ npm start`
