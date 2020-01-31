@@ -6,6 +6,7 @@ import { QuestionCard } from './cards/QuestionCard';
 import { Question } from '../../models/Question';
 import { RouteMap } from '../RouteMap';
 import { useAuth } from '../../api/auth/AuthContext';
+import { backendAddress } from '../../config';
 const uuidv4 = require('uuid/v4');
 
 enum ErrorMessage {
@@ -41,7 +42,7 @@ const EditPoll = (props: CreateComponentProps) => {
       try {
         const fetchPoll = async () => {
           const result = await fetch(
-            `http://localhost:8080/api/polls/${pollId}`,
+            `${backendAddress}/api/polls/${pollId}`,
             {
               method: 'GET',
             }
@@ -76,7 +77,7 @@ const EditPoll = (props: CreateComponentProps) => {
   const postNewPoll = async () => {
     try {
       if (user) {
-        const result = await fetch('http://localhost:8080/api/polls/new', {
+        const result = await fetch(`${backendAddress}/api/polls/new`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -104,7 +105,7 @@ const EditPoll = (props: CreateComponentProps) => {
   const patchPoll = async () => {
     const pollId = props.match.params.pollId;
     try {
-      const result = await fetch(`http://localhost:8080/api/polls/${pollId}`, {
+      const result = await fetch(`${backendAddress}/api/polls/${pollId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

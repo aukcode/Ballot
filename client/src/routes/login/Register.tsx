@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useEffect } from 'react';
 import { RouteMap } from '../RouteMap';
+import { backendAddress } from '../../config';
 const voteHere = require('./vote-here.jpg');
 
 enum RegisterStatus {
@@ -25,7 +26,7 @@ const Register = (props: Props) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const result = await fetch('http://localhost:8080/api/users/register', {
+    const result = await fetch(`${backendAddress}/api/users/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

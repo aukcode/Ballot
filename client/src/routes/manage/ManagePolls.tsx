@@ -5,6 +5,7 @@ import { Poll } from '../../models/Poll';
 import { useAuth } from '../../api/auth/AuthContext';
 import { PollCard } from './cards/PollCard';
 import { RouteMap } from '../RouteMap';
+import { backendAddress } from '../../config';
 
 enum ErrorMessage {
   USER_NOT_FOUND = 'User not found. Are you sure you are logged in?',
@@ -30,7 +31,7 @@ const ManagePolls = (props: Props) => {
       try {
         const fetchPolls = async () => {
           const result = await fetch(
-            `http://localhost:8080/api/polls/user/${userId}`,
+            `${backendAddress}/api/polls/user/${userId}`,
             {
               method: 'GET',
             }
@@ -106,7 +107,7 @@ const ManagePolls = (props: Props) => {
 
   const archivePoll = async (pollId: string) => {
     try {
-      await fetch(`http://localhost:8080/api/polls/archive/${pollId}`, {
+      await fetch(`${backendAddress}/api/polls/archive/${pollId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -128,7 +129,7 @@ const ManagePolls = (props: Props) => {
 
   const deletePoll = async (pollId: string) => {
     try {
-      await fetch(`http://localhost:8080/api/polls/${pollId}`, {
+      await fetch(`${backendAddress}/api/polls/${pollId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { RouteMap } from '../RouteMap';
 import { useAuth } from '../../api/auth/AuthContext';
+import { backendAddress } from '../../config';
 const voteHere = require('./vote-here.jpg');
 
 enum Error {
@@ -24,7 +25,7 @@ const Login = (props: Props) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const result = await fetch('http://localhost:8080/api/users/login', {
+      const result = await fetch(`${backendAddress}/api/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
