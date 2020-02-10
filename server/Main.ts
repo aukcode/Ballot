@@ -36,7 +36,7 @@ const pollsRoute = require('./routes/Polls');
 app.use('/api/users', authRoute);
 app.use('/api/polls', pollsRoute);
 
-const hey = 'Hello from client-backend';
+const hey = 'Hello from ballot-backend';
 app.get('/hey', (req: Request, res: Response) => res.json({ hey }).send());
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));
