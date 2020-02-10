@@ -10,7 +10,7 @@ const configureAccessControl = (
   res: Response,
   next: NextFunction
 ) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000, http://ballot-frontend.s3-website.eu-north-1.amazonaws.com/');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.header('Access-Control-Expose-Headers', 'authorization');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
