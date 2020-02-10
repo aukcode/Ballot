@@ -23,6 +23,7 @@ const Register = (props: Props) => {
   const [registerStatus, setRegisterStatus] = useState<RegisterStatus>(
     RegisterStatus.REGISTER
   );
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -42,6 +43,8 @@ const Register = (props: Props) => {
       setRegisterStatus(RegisterStatus.SUCCESS);
     } else {
       setRegisterStatus(RegisterStatus.ERROR);
+      //setErrorMessage(result)
+      result.text().then(data => setErrorMessage(data))
     }
   };
 
@@ -77,8 +80,12 @@ const Register = (props: Props) => {
       return (
         <div className="h-40 flex justify-center items-center text-center">
           <div>
+            <p>
+            An error occurred: {errorMessage}
+            </p>
             <p className="font-bold">
-              An error occurred. Do you want to try again?
+              
+              Do you want to try again?
             </p>
             <button
               onClick={() => setRegisterStatus(RegisterStatus.REGISTER)}
