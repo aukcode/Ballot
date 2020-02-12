@@ -43,7 +43,6 @@ const Register = (props: Props) => {
       setRegisterStatus(RegisterStatus.SUCCESS);
     } else {
       setRegisterStatus(RegisterStatus.ERROR);
-      //setErrorMessage(result)
       result.text().then(data => setErrorMessage(data))
     }
   };
@@ -126,7 +125,7 @@ const Register = (props: Props) => {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="email"
-              placeholder="Email adress"
+              placeholder="Email address"
               value={email}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setEmail(e.target.value);
