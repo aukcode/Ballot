@@ -68,6 +68,7 @@ const ManagePolls = (props: Props) => {
                 archivePoll={archivePoll}
                 updatePoll={updatePoll}
                 deletePoll={deletePoll}
+                conductPoll={conductPoll}
               />
             );
           })}
@@ -97,6 +98,7 @@ const ManagePolls = (props: Props) => {
                 archivePoll={archivePoll}
                 updatePoll={updatePoll}
                 deletePoll={deletePoll}
+                conductPoll={conductPoll}
               />
             );
           })}
@@ -142,6 +144,10 @@ const ManagePolls = (props: Props) => {
     } catch (err) {
       setErrorMessage(`${ErrorMessage.SERVER_ERROR}: ${err}`);
     }
+  };
+
+  const conductPoll = (pollId: string) => {
+    props.history.push(RouteMap.conduct.createPath(pollId));
   };
 
   return (

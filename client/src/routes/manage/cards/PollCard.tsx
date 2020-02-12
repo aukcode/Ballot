@@ -9,6 +9,7 @@ interface PollCardProps {
   archivePoll: (pollId: string) => void;
   updatePoll: (pollId: string) => void;
   deletePoll: (pollId: string) => void;
+  conductPoll: (pollId: string) => void;
 }
 
 export const PollCard = (props: PollCardProps) => {
@@ -26,6 +27,10 @@ export const PollCard = (props: PollCardProps) => {
 
   const updatePoll = (event: React.MouseEvent<HTMLElement>) => {
     props.updatePoll(poll.id);
+  };
+
+  const conductPoll = (event: React.MouseEvent<HTMLElement>) => {
+    props.conductPoll(poll.id)
   };
 
   const deletePoll = () => {
@@ -63,6 +68,11 @@ export const PollCard = (props: PollCardProps) => {
                   setShouldShowArchiveDialog(false);
                 }}
                 className="fas fa-trash ml-8 fa-lg opacity-50 hover:opacity-75 cursor-pointer"
+              />
+              <i
+                title="Conduct this poll"
+                onClick={conductPoll}
+                className="fas fa-play ml-8 fa-lg opacity-50 hover:opacity-75 color-orange-500 cursor-pointer" 
               />
             </div>
           )}
