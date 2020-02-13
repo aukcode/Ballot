@@ -40,7 +40,7 @@ const ConductPoll = (props: props) => {
                 .json()
                 .then(res => {
                   setQuestions(res.questions);
-                  console.log(res.questions)
+                  console.log(res.questions);
                   setPollTitle(res.title);
                 })
                 .catch(err =>
@@ -54,18 +54,20 @@ const ConductPoll = (props: props) => {
       }, [pollId]);
 
       const renderCurrentQuestion = () => {
+        if (questions[currentQuestion] !== undefined) {
           return (
-              <div>
-                  <p>{questions[0].question}</p>
-              </div>
-          )
+            <div>
+                <p>{questions[currentQuestion].question}</p>
+            </div>
+        )
+        } 
       }
 
 
     return (
         <div className="flex justify-center mt-8">
             <p className="text-2xl">{pollTitle}</p>
-            {questions.map(question => question.question)}
+            {renderCurrentQuestion()}
             
         </div>
     )
