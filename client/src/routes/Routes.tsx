@@ -8,6 +8,7 @@ import { RegisterComponent } from './login/Register';
 import { LoginGuard } from './login/LoginGuard';
 import { ManagePollsComponent } from './manage/ManagePolls';
 import { NavbarContainer } from './navbar/NavbarContainer';
+import { ConductPollComponent } from './conduct/ConductPoll';
 
 export const Routes = () => {
   return (
@@ -38,6 +39,11 @@ export const Routes = () => {
             <Route
               path={RouteMap.manage.edit.path}
               component={EditPollComponent}
+              exact={true}
+            />
+            <Route
+              path={RouteMap.conduct.path}
+              component={ConductPollComponent}
               exact={true}
             />
           </LoginGuard>

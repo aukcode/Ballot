@@ -10,7 +10,7 @@ const configureAccessControl = (
   res: Response,
   next: NextFunction
 ) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.header('Access-Control-Expose-Headers', 'authorization');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
@@ -36,7 +36,7 @@ const pollsRoute = require('./routes/Polls');
 app.use('/api/users', authRoute);
 app.use('/api/polls', pollsRoute);
 
-const hey = 'Hello from client-backend';
+const hey = 'Hello from ballot-backend';
 app.get('/hey', (req: Request, res: Response) => res.json({ hey }).send());
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));

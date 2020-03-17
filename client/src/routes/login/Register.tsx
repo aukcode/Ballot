@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useEffect } from 'react';
 import { RouteMap } from '../RouteMap';
+import { backendAddress } from '../../config';
 const voteHere = require('./vote-here.jpg');
 
 enum RegisterStatus {
@@ -22,10 +23,11 @@ const Register = (props: Props) => {
   const [registerStatus, setRegisterStatus] = useState<RegisterStatus>(
     RegisterStatus.REGISTER
   );
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const result = await fetch('http://localhost:8080/api/users/register', {
+    const result = await fetch(`${backendAddress}/api/users/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,6 +43,7 @@ const Register = (props: Props) => {
       setRegisterStatus(RegisterStatus.SUCCESS);
     } else {
       setRegisterStatus(RegisterStatus.ERROR);
+      result.text().then(data => setErrorMessage(data))
     }
   };
 
@@ -76,8 +79,12 @@ const Register = (props: Props) => {
       return (
         <div className="h-40 flex justify-center items-center text-center">
           <div>
+            <p>
+            An error occurred: {errorMessage}
+            </p>
             <p className="font-bold">
-              An error occurred. Do you want to try again?
+              
+              Do you want to try again?
             </p>
             <button
               onClick={() => setRegisterStatus(RegisterStatus.REGISTER)}
@@ -118,7 +125,7 @@ const Register = (props: Props) => {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="email"
-              placeholder="Email adress"
+              placeholder="Email address"
               value={email}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setEmail(e.target.value);
