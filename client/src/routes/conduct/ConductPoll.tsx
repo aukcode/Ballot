@@ -75,15 +75,48 @@ const ConductPoll = (props: props) => {
         }
       }
 
+      const renderNavButtons = () => {
+        return (
+            <div className="flex justify-between mt-12">
+            <button
+              onClick={() => currentQuestion > 0 
+                ? setCurrentQuestion(currentQuestion - 1) 
+                : false}
+              className="py-2 px-16 w-auto bg-gray-200 hover:bg-gray-400 font-bold text-gray-700 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Cancel
+            </button>
+            
+              <button
+                onClick={() => currentQuestion < questions.length 
+                  ? setCurrentQuestion(currentQuestion + 1)
+                  : false // TODO: push nav to finish page
+                }
+                className="py-2 px-16 w-auto bg-blue-500 hover:bg-blue-600 font-bold text-white rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                {currentQuestion >= questions.length ? "Finish" : "Next"}
+              </button>
+            
+            </div>
+        )
+      }
+
 
     return (
         <div className="flex justify-center mt-8">
           <div className="mx-3 w-full sm:max-w-3xl p-4">
             <p className="text-4xl border-b-2 text-gray-600">{pollTitle}</p>
-            <div className="mt-16 p-8 shadow rounded-lg">
-              <p>{renderCurrentQuestion()}</p>
-              <p>{renderCurrentOptions()}</p>
+            {renderNavButtons()}
+            <div className="mt-8 p-8 shadow rounded-lg">
+              {renderCurrentQuestion()}
+              {renderCurrentOptions()}
+              {currentQuestion >= questions.length &&
+                <p className="text-center text-lg font-semibold text-gray-800">That's all folks! Click Finish to end the polling</p>
+              }
             </div>
+            
           </div>
         </div>
     )
