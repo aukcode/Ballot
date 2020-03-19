@@ -20,6 +20,7 @@ type props = RouteComponentProps<ConductPollComponentRouterProps> &
 ConductPollComponentOwnProps;
 
 const ConductPoll = (props: props) => {
+    const [pollPin, setPollPin] = useState<number>();
     const [pollTitle, setPollTitle] = useState<string>('');
     const [questions, setQuestions] = useState<Question[]>([]);
     const [errorMessage, setErrorMessage] = useState<string>('');
@@ -40,8 +41,8 @@ const ConductPoll = (props: props) => {
                 .json()
                 .then(res => {
                   setQuestions(res.questions);
-                  console.log(res.questions);
                   setPollTitle(res.title);
+                  setPollPin(res.pollPin)
                 })
                 .catch(err =>
                   setErrorMessage(`${ErrorMessage.QUESTION_NOT_FOUND}: ${err}`)
@@ -85,7 +86,7 @@ const ConductPoll = (props: props) => {
               className="py-2 px-16 w-auto bg-gray-200 hover:bg-gray-400 font-bold text-gray-700 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              Cancel
+              Back
             </button>
             
               <button
@@ -107,7 +108,7 @@ const ConductPoll = (props: props) => {
     return (
         <div className="flex justify-center mt-8">
           <div className="mx-3 w-full sm:max-w-3xl p-4">
-            <p className="text-4xl border-b-2 text-gray-600">{pollTitle}</p>
+            <p className="text-4xl border-b-2 text-gray-600">{pollTitle} - Pin: {pollPin}</p>
             {renderNavButtons()}
             <div className="mt-8 p-8 shadow rounded-lg">
               {renderCurrentQuestion()}
