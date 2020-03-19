@@ -57,18 +57,34 @@ const ConductPoll = (props: props) => {
         if (questions[currentQuestion] !== undefined) {
           return (
             <div>
-                <p>{questions[currentQuestion].question}</p>
+                <p className="text-4xl">{questions[currentQuestion].question}</p>
             </div>
-        )
+          )
         } 
+      }
+
+      const renderCurrentOptions = () => {
+        if (questions[currentQuestion] !== undefined) {
+          return (
+            <div className="ml-4 mt-8">
+              {questions[currentQuestion].options.map(option => (
+                    <p className="inline-block bg-blue-200 rounded-full px-5 py-2 text-xl m-2">{option}</p>
+              ))}
+            </div>
+          )
+        }
       }
 
 
     return (
         <div className="flex justify-center mt-8">
-            <p className="text-2xl">{pollTitle}</p>
-            {renderCurrentQuestion()}
-            
+          <div className="mx-3 w-full sm:max-w-3xl p-4">
+            <p className="text-4xl border-b-2 text-gray-600">{pollTitle}</p>
+            <div className="mt-16 p-8 shadow rounded-lg">
+              <p>{renderCurrentQuestion()}</p>
+              <p>{renderCurrentOptions()}</p>
+            </div>
+          </div>
         </div>
     )
 };
