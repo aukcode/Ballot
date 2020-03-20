@@ -16,5 +16,9 @@ export const RouteMap = {
   conduct: {
     path: '/conduct/:pollId',
     createPath: (pollId: string) => `/conduct/${pollId}`,
-  }
+  },
+  results: {
+    path: '/results/:pollId',
+    createPath: (pollId: string) => `/results/${pollId}`,
+  },
 };

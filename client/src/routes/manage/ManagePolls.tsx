@@ -69,6 +69,7 @@ const ManagePolls = (props: Props) => {
                 updatePoll={updatePoll}
                 deletePoll={deletePoll}
                 conductPoll={conductPoll}
+                showResults={showResults}
               />
             );
           })}
@@ -99,6 +100,7 @@ const ManagePolls = (props: Props) => {
                 updatePoll={updatePoll}
                 deletePoll={deletePoll}
                 conductPoll={conductPoll}
+                showResults={showResults}
               />
             );
           })}
@@ -148,6 +150,10 @@ const ManagePolls = (props: Props) => {
 
   const conductPoll = (pollId: string) => {
     props.history.push(RouteMap.conduct.createPath(pollId));
+  };
+
+  const showResults = (pollId: string) => {
+    props.history.push(RouteMap.results.createPath(pollId));
   };
 
   return (
