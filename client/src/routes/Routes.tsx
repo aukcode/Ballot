@@ -9,7 +9,7 @@ import { LoginGuard } from './login/LoginGuard';
 import { ManagePollsComponent } from './manage/ManagePolls';
 import { NavbarContainer } from './navbar/NavbarContainer';
 import { ConductPollComponent } from './conduct/ConductPoll';
-import { ResultsComponent } from './results/results';
+import { ResultsComponent } from './results/Results';
 
 export const Routes = () => {
   return (

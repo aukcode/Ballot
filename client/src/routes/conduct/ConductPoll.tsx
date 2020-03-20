@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { backendAddress } from '../../config';
 import { Question } from '../../models/Question';
+import { RouteMap } from '../RouteMap';
 
 enum ErrorMessage {
   QUESTION_NOT_FOUND = 'Question not found',
@@ -91,11 +92,10 @@ const ConductPoll = (props: props) => {
         </button>
 
         <button
-          onClick={
-            () =>
-              currentQuestion < questions.length
-                ? setCurrentQuestion(currentQuestion + 1)
-                : false // TODO: push nav to finish page
+          onClick={() =>
+            currentQuestion < questions.length
+              ? setCurrentQuestion(currentQuestion + 1)
+              : props.history.push(RouteMap.results.createPath(pollId))
           }
           className="py-2 px-16 w-auto bg-blue-500 hover:bg-blue-600 font-bold text-white rounded focus:outline-none focus:shadow-outline"
           type="submit"
