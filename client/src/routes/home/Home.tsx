@@ -16,8 +16,6 @@ enum ErrorMessage {
 
 const Home = (props: Props) => {
   const [pin, setPin] = useState<string>('');
-  const [pollId, setPollId] = useState<string>('');
-  const [isActive, setIsActive] = useState<boolean>();
   const [name, setName] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
 
