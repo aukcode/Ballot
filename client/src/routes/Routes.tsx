@@ -10,6 +10,7 @@ import { ManagePollsComponent } from './manage/ManagePolls';
 import { NavbarContainer } from './navbar/NavbarContainer';
 import { ConductPollComponent } from './conduct/ConductPoll';
 import { ResultsComponent } from './results/Results';
+import { VoteComponent } from './vote/Vote';
 
 export const Routes = () => {
   return (
@@ -50,6 +51,11 @@ export const Routes = () => {
             <Route
               path={RouteMap.results.path}
               component={ResultsComponent}
+              exact={true}
+            />
+            <Route
+              path={RouteMap.vote.path}
+              component={VoteComponent}
               exact={true}
             />
           </LoginGuard>
