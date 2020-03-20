@@ -32,6 +32,11 @@ export const Routes = () => {
             component={LoginComponent}
             exact={true}
           />
+          <Route
+            path={RouteMap.vote.path}
+            component={VoteComponent}
+            exact={true}
+          />
           <LoginGuard>
             <Route
               path={RouteMap.manage.path}
@@ -51,11 +56,6 @@ export const Routes = () => {
             <Route
               path={RouteMap.results.path}
               component={ResultsComponent}
-              exact={true}
-            />
-            <Route
-              path={RouteMap.vote.path}
-              component={VoteComponent}
               exact={true}
             />
           </LoginGuard>

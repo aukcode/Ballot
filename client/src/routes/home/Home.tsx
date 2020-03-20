@@ -31,7 +31,7 @@ const Home = (props: Props) => {
           .json()
           .then(res => {
             if (!res.active) {
-              props.history.push(RouteMap.vote.createPath(res.id));
+              props.history.push(RouteMap.vote.createPath(res.id, name));
             }
           })
           .catch(err =>
