@@ -21,5 +21,17 @@ router.post('/new', async (req: Request, res: Response) => {
 // patch. frontend controls what is updated
 
 // delete
+router.delete('/:id', async (req: Request, res: Response) => {
+  const activePollId = req.params.id;
+  const poll = await ActivePoll.findOneAndDelete(
+    { _id: activePollId },
+    function(err) {
+      err ? console.log(err) : console.log('successful deletion');
+    }
+  );
+  res
+    .status(200)
+    .send(`Successfully deleted activePoll with id: ${activePollId}`);
+});
 
 module.exports = router;
