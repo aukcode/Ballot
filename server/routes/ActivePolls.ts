@@ -3,8 +3,16 @@ import { Request, Response } from 'express';
 const ActivePoll = require('../schemas/ActivePoll');
 import v4 = require('uuid/v4');
 
-// new. There should be controls to only have one activePoll/ actual poll
 router.post('/new', async (req: Request, res: Response) => {
+  const activePollAlreadyExistsOnPoll = await ActivePoll.findOne({
+    pollId: req.body.pollId,
+  });
+
+  if (activePollAlreadyExistsOnPoll) {
+    res.status(400).send({ err: 'Poll is already conducting' });
+    return;
+  }
+
   const newActivePoll = new ActivePoll({
     pollId: req.body.pollId,
     currentQuestion: 0,
@@ -20,7 +28,6 @@ router.post('/new', async (req: Request, res: Response) => {
 
 // patch. frontend controls what is updated
 
-// delete
 router.delete('/:id', async (req: Request, res: Response) => {
   const activePollId = req.params.id;
   const poll = await ActivePoll.findOneAndDelete(
