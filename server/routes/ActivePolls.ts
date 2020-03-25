@@ -26,11 +26,24 @@ router.post('/new', async (req: Request, res: Response) => {
   }
 });
 
-// patch. frontend controls what is updated
+router.patch('/:id', async (req: Request, res: Response) => {
+  const filter = { id: req.params._id };
+  const update = {
+    respondents: req.body.respondents,
+    answerSets: req.body.answerSets,
+    currentQuestion: req.body.currentQuestion,
+  };
+
+  // having the findOneAndUpdate return straight to const
+  // made the change lag with one turn
+  await ActivePoll.findOneAndUpdate(filter, update);
+  const activePoll = await ActivePoll.findOne(filter);
+  res.status(200).send(activePoll);
+});
 
 router.delete('/:id', async (req: Request, res: Response) => {
   const activePollId = req.params.id;
-  const poll = await ActivePoll.findOneAndDelete(
+  const activePoll = await ActivePoll.findOneAndDelete(
     { _id: activePollId },
     function(err) {
       err ? console.log(err) : console.log('successful deletion');
