@@ -11,7 +11,7 @@ const ActivePollSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
-  answersSets: {
+  answerSets: {
     type: Array,
     required: true,
   },
