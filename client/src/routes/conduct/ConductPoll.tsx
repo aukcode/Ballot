@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { backendAddress } from '../../config';
 import { Question } from '../../models/Question';
 import { RouteMap } from '../RouteMap';
+import { useActivePoll } from '../../api/auth/ActivePollContext';
 
 enum ErrorMessage {
   QUESTION_NOT_FOUND = 'Question not found',
@@ -26,6 +27,7 @@ const ConductPoll = (props: props) => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
+  const { respondents } = useActivePoll();
 
   const pollId = props.match.params.pollId;
 
@@ -94,7 +96,8 @@ const ConductPoll = (props: props) => {
         <button
           onClick={() =>
             currentQuestion < questions.length
-              ? setCurrentQuestion(currentQuestion + 1)
+              ? (setCurrentQuestion(currentQuestion + 1),
+                console.log(respondents))
               : props.history.push(RouteMap.results.createPath(pollId))
           }
           className="py-2 px-16 w-auto bg-blue-500 hover:bg-blue-600 font-bold text-white rounded focus:outline-none focus:shadow-outline"

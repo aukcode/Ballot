@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react';
 import { ChangeEvent } from 'react';
 import { backendAddress } from '../../config';
 import { RouteMap } from '../RouteMap';
+import { useActivePoll } from '../../api/auth/ActivePollContext';
 
 interface HomeProps {}
 
@@ -18,6 +19,7 @@ const Home = (props: Props) => {
   const [pin, setPin] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const { addRespondent } = useActivePoll();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -31,6 +33,8 @@ const Home = (props: Props) => {
           .json()
           .then(res => {
             if (!res.active) {
+              // TODO: remove !
+              addRespondent(name);
               props.history.push(RouteMap.vote.createPath(res.id, name));
             }
           })
