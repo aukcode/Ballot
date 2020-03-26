@@ -3,7 +3,9 @@ import { Result } from '../../models/Result';
 
 export interface ActivePollContextValues {
   currentQuestion: number;
-  currentResult: Result | undefined;
+  setActivePollId: (pollId: string) => void;
+  addRespondent: (respondentName: string) => void;
+  respondents: string[];
 }
 
 const defaultContext = <T>() => {
