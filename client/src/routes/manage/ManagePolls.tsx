@@ -6,6 +6,7 @@ import { useAuth } from '../../api/auth/AuthContext';
 import { PollCard } from './cards/PollCard';
 import { RouteMap } from '../RouteMap';
 import { backendAddress } from '../../config';
+import { useActivePoll } from '../../api/auth/ActivePollContext';
 
 enum ErrorMessage {
   USER_NOT_FOUND = 'User not found. Are you sure you are logged in?',
@@ -24,6 +25,7 @@ const ManagePolls = (props: Props) => {
   const [polls, setPolls] = useState<Poll[]>([]);
   const [archivedPolls, setArchivedPolls] = useState<Poll[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const { initiateNewActivePoll } = useActivePoll();
 
   useEffect(() => {
     if (user) {
@@ -149,6 +151,7 @@ const ManagePolls = (props: Props) => {
   };
 
   const conductPoll = (pollId: string) => {
+    initiateNewActivePoll(pollId);
     props.history.push(RouteMap.conduct.createPath(pollId));
   };
 

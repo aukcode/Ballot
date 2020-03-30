@@ -27,6 +27,7 @@ router.post('/new', async (req: Request, res: Response) => {
 });
 
 router.patch('/:id', async (req: Request, res: Response) => {
+  console.log('Patching active poll');
   const filter = { id: req.params._id };
   const update = {
     respondents: req.body.respondents,

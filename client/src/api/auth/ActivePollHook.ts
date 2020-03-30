@@ -10,8 +10,25 @@ export const CreateActivePollHook = (): ActivePollContextValues => {
   const [respondents, setRespondents] = useState<string[]>([]);
   const [answerSets, setAnswerSets] = useState<AnswerSet[]>([]);
 
-  const initiateNewActivePoll = () => {
+  const initiateNewActivePoll = async (pollId: string) => {
     // fetch for new activepoll and set the activepollid
+    try {
+      const result = await fetch(`${backendAddress}/api/active-polls/new`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          pollId,
+        }),
+      });
+
+      result.json().then(res => {
+        setActivePollId(res._id);
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const addRespondent = (newRespondent: string) => {
@@ -24,12 +41,16 @@ export const CreateActivePollHook = (): ActivePollContextValues => {
     console.log(respondents);
 
     try {
-      await fetch(`${backendAddress}/api/active-poll/${activePollId}`, {
+      await fetch(`${backendAddress}/api/active-polls/${activePollId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({}),
+        body: JSON.stringify({
+          respondents,
+          answerSets,
+          currentQuestion,
+        }),
       }).catch(err => console.log(err));
     } catch (err) {
       console.log(err);
@@ -37,6 +58,7 @@ export const CreateActivePollHook = (): ActivePollContextValues => {
   };
 
   return {
+    initiateNewActivePoll,
     currentQuestion,
     setActivePollId,
     addRespondent,
